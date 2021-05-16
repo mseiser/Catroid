@@ -105,8 +105,8 @@ jacocoAndroidUnitTestReport {
     xml.enabled true
 }
 
-def defaultVersionCode = 85
-def defaultVersionName = "1.0.3"
+def defaultVersionCode = 86
+def defaultVersionName = "1.0.4"
 
 android {
     compileSdkVersion 29
