@@ -56,7 +56,7 @@
     <string name="please_wait">โปรดรอสักครู่</string>
     <string name="search_hint">ค้นหา&#8230;</string>
     <string name="backpack_add">เพิ่มไปยังชุดข้อมูล</string>
-    <string name="share_website_text">แชร์เว็บไซต์</string>
+    <string name="share_website_text">share.catrob.at</string>
     <!-- Security warning dialog -->
     <string name="security_warning_dialog_msg">โครงการที่คุณดาวน์โหลดไว้ฟังเสียงของคุณ
          อยู่เบื้องหลังและส่งข้อมูลไปยังอินเทอร์เน็ต สิ่งนี้อาจไม่เป็นอันตรายและจำเป็น
@@ -162,35 +162,35 @@
     <!-- Lego/Drone/Raspi/Chromecast/Embroidery -->
     <string name="preference_title_enable_quadcopter_bricks">Parrot AR.Drone 2.0 extension</string>
     <string name="preference_description_quadcopter_bricks">อนุญาตให้แอปควบคุม Parrot AR.Drone 2.0 quadcopters</string>
-    <string name="preference_title_enable_jumpingsumo_bricks">Parrot Jumping Sumo extension</string>
-    <string name="preference_description_jumpingsumo_bricks">Allow the app to control Parrot\'s Jumping Sumo robots</string>
-    <string name="preference_title_enable_mindstorms_nxt_bricks">Lego Mindstorms NXT extension</string>
-    <string name="preference_title_enable_mindstorms_ev3_bricks">Lego Mindstorms EV3 extension</string>
-    <string name="preference_description_mindstorms_nxt_bricks">Allow the app to control Lego Mindstorms NXT robots</string>
-    <string name="preference_description_mindstorms_ev3_bricks">Allow the app to control Lego Mindstorms EV3 robots</string>
-    <string name="preference_title_mindstorms_nxt_sensors">Lego NXT Sensors</string>
-    <string name="preference_title_mindstorms_ev3_sensors">Lego EV3 Sensors</string>
-    <string name="preference_title_drone_config_properties">Parrot AR.Drone 2.0 configuration</string>
-    <string name="preference_title_enable_phiro_bricks">RobotixEdu\'s Phiro extension</string>
-    <string name="preference_description_phiro_bricks">Allow the app to control RobotixEdu\'s Phiro robots</string>
-    <string name="preference_title_enable_arduino_bricks">Arduino extension</string>
-    <string name="preference_description_arduino_bricks">Allow the app to control Arduino boards</string>
-    <string name="preference_title_enable_embroidery_bricks">Embroidery extension</string>
-    <string name="preference_description_embroidery_bricks">Create patterns for stitching machines</string>
-    <string name="preference_title_cast_feature_globally_enabled">Chromecast extension</string>
-    <string name="preference_description_cast_feature_globally_enabled">Show cast button and enable cast projects</string>
+    <string name="preference_title_enable_jumpingsumo_bricks">Parrot Jumping Sumo ส่วนขยาย</string>
+    <string name="preference_description_jumpingsumo_bricks">อนุญาตให้แอปควบคุมหุ่นยนต์ซูโม่กระโดดของนกแก้ว</string>
+    <string name="preference_title_enable_mindstorms_nxt_bricks">ส่วนขยาย Lego Mindstorms NXT</string>
+    <string name="preference_title_enable_mindstorms_ev3_bricks">ตัวต่อ Lego Mindstorms EV3</string>
+    <string name="preference_description_mindstorms_nxt_bricks">อนุญาตให้แอปควบคุมหุ่นยนต์ Lego Mindstorms NXT</string>
+    <string name="preference_description_mindstorms_ev3_bricks">อนุญาตให้แอปควบคุมหุ่นยนต์ Lego Mindstorms EV3</string>
+    <string name="preference_title_mindstorms_nxt_sensors">เลโก้ NXT เซนเซอร์</string>
+    <string name="preference_title_mindstorms_ev3_sensors">เลโก้ EV3 เซนเซอร์</string>
+    <string name="preference_title_drone_config_properties">การกำหนดค่า Parrot AR.Drone 2.0</string>
+    <string name="preference_title_enable_phiro_bricks">ส่วนขยาย Phiro ของ RobotixEdu</string>
+    <string name="preference_description_phiro_bricks">อนุญาตให้แอปควบคุมหุ่นยนต์ Phiro ของ RobotixEdu</string>
+    <string name="preference_title_enable_arduino_bricks">ส่วนขยาย Arduino</string>
+    <string name="preference_description_arduino_bricks">อนุญาตให้แอปควบคุมบอร์ด Arduino</string>
+    <string name="preference_title_enable_embroidery_bricks">การต่อเย็บปักถักร้อย</string>
+    <string name="preference_description_embroidery_bricks">สร้างรูปแบบสำหรับเครื่องเย็บ</string>
+    <string name="preference_title_cast_feature_globally_enabled">ส่วนขยาย Chromecast</string>
+    <string name="preference_description_cast_feature_globally_enabled">แสดงปุ่มแคสต์และเปิดใช้โปรเจ็กต์แคสต์</string>
     <string name="preference_title_enable_nfc_bricks">ส่วนขยายการสื่อสารระยะใกล้</string>
     <string name="preference_description_nfc_bricks">อนุญาตให้แอปใช้แท็ก NFC ในโครงการ</string>
     <string name="preference_title_enable_crash_reports">การส่งรายงานข้อผิดพลาดที่ไม่ระบุชื่อ</string>
     <string name="preference_description_crash_reports">อนุญาตให้แอปส่งรายงานข้อขัดข้องโดยอัตโนมัติ</string>
     <!-- -->
-    <string name="preference_title_enable_raspi_bricks">Raspberry Pi extension</string>
-    <string name="preference_description_raspi_bricks">Allow the app to control Raspberry Pi computers</string>
+    <string name="preference_title_enable_raspi_bricks">ส่วนขยาย Raspberry Pi</string>
+    <string name="preference_description_raspi_bricks">อนุญาตให้แอปควบคุมคอมพิวเตอร์ Raspberry Pi</string>
     <string name="preference_raspi_enable_bricks">เปิดใช้งานชุดคำสั้งและเซ็นเซอร์</string>
     <string name="preference_raspi_help">ช่วยเหลือ / เริ่มต้นใช้งาน</string>
     <string name="preference_raspi_help_summary">รับความช่วยเหลือเกี่ยวกับวิธีกำหนดการตั้งค่าการเชื่อมต่อ</string>
-    <string name="preference_raspi_host">Raspberry Pi IP-/host-address</string>
-    <string name="preference_raspi_port">Raspberry Pi port</string>
+    <string name="preference_raspi_host">Raspberry Pi IP- / ที่อยู่โฮสต์</string>
+    <string name="preference_raspi_port">พอร์ต Raspberry Pi</string>
     <!--  -->
     <string name="preference_title_multiplayer_variables_enabled">ส่วนขยายผู้เล่นหลายคน</string>
     <string name="preference_description_multiplayer_variables_enabled">อนุญาตให้แอปใช้
@@ -553,10 +553,10 @@
     <!-- -->
     <!-- About Dialog -->
     <string name="dialog_about_title">เกี่ยวกับ App นี้</string>
-    <string name="dialog_about_license_info">This app offers a coding
-        environment and interpreter for the visual programming language Catrobat.\n
-        The source code of this app is mainly licensed under the GNU AGPL v3 license.
-        For further details on the license see the link below.\n</string>
+    <string name="dialog_about_license_info">แอพนี้มีการเข้ารหัส
+        สภาพแวดล้อมและล่ามสำหรับภาษาโปรแกรมภาพ Catrobat\n
+        ซอร์สโค้ดของแอพนี้ส่วนใหญ่ได้รับอนุญาตภายใต้ใบอนุญาต GNU AGPL v3
+        สำหรับรายละเอียดเพิ่มเติมเกี่ยวกับใบอนุญาตโปรดดูลิงก์ด้านล่าง\n</string>
     <string name="dialog_about_license_link_text">ใบอนุญาตรหัสที่มา</string>
     <string name="dialog_about_catrobat_link_text">เกี่ยวกับ Catrobat</string>
     <string name="dialog_about_catrobat_language_version">Catrobat เวอร์ชันภาษา </string>
@@ -710,31 +710,31 @@
     <string name="category_data" tools:ignore="UnusedResources">ข้อมูล</string>
     <string name="category_device" tools:ignore="UnusedResources">อุปกรณ์</string>
     <string name="category_lego_nxt" tools:ignore="UnusedResources">Lego NXT</string>
-    <string name="category_lego_ev3" tools:ignore="UnusedResources">Lego EV3</string>
+    <string name="category_lego_ev3" tools:ignore="UnusedResources">เลโก้ EV3</string>
     <string name="category_drone" tools:ignore="UnusedResources">AR.Drone 2.0</string>
-    <string name="category_jumping_sumo" tools:ignore="UnusedResources">Jumping Sumo</string>
-    <string name="category_phiro" tools:ignore="UnusedResources">Phiro</string>
+    <string name="category_jumping_sumo" tools:ignore="UnusedResources">กระโดดซูโม่</string>
+    <string name="category_phiro" tools:ignore="UnusedResources">ฟีโร</string>
     <string name="category_arduino" tools:ignore="UnusedResources">Arduino</string>
     <string name="category_cast" tools:ignore="UnusedResources">Chromecast</string>
-    <string name="category_raspi" tools:ignore="UnusedResources">Raspberry Pi</string>
-    <string name="category_assertions" tools:ignore="UnusedResources">Testing</string>
+    <string name="category_raspi" tools:ignore="UnusedResources">ราสเบอร์รี่ Pi</string>
+    <string name="category_assertions" tools:ignore="UnusedResources">การทดสอบ</string>
     <!--  -->
     <!-- User Defined Bricks -->
     <string name="brick_user_defined_add_label">เพิ่มป้ายชื่อ</string>
     <string name="brick_user_defined_add_input">เพิ่มข้อมูลนำเข้า</string>
-    <string name="brick_user_defined_add_input_description">Add input for this brick:</string>
-    <string name="brick_user_defined_add_label_description">Add label for this brick:</string>
-    <string name="brick_user_defined_default_input_name">Name of input</string>
-    <string name="brick_user_defined_default_label">Label text</string>
-    <string name="brick_user_defined_already_exists">A brick with these labels already exists. Please add more labels or inputs.</string>
+    <string name="brick_user_defined_add_input_description">เพิ่มอินพุตสำหรับอิฐนี้:</string>
+    <string name="brick_user_defined_add_label_description">เพิ่มป้ายกำกับสำหรับอิฐนี้:</string>
+    <string name="brick_user_defined_default_input_name">ชื่ออินพุต</string>
+    <string name="brick_user_defined_default_label">ข้อความป้ายกำกับ</string>
+    <string name="brick_user_defined_already_exists">อิฐที่มีป้ายกำกับเหล่านี้มีอยู่แล้ว โปรดเพิ่มป้ายกำกับหรืออินพุตเพิ่มเติม</string>
     <string name="brick_user_defined_script_define" tools:ignore="UnusedResources">กำหนด</string>
     <string name="brick_user_defined_script_as" tools:ignore="UnusedResources">เช่นเดียวกับ</string>
-    <string name="brick_user_defined_list_empty">Tap \"+\" to add your own new bricks.</string>
+    <string name="brick_user_defined_list_empty">แตะ \"+\" เพื่อเพิ่มอิฐใหม่ของคุณเอง</string>
     <string name="brick_report" tools:ignore="UnusedResources">รายงาน</string>
     <!--  -->
     <!-- Motion bricks -->
     <string name="brick_place_at" tools:ignore="UnusedResources">"วางที่"</string>
-    <string name="brick_option_place_visually">Place visually</string>
+    <string name="brick_option_place_visually">วางด้วยสายตา</string>
     <string name="x_label" tools:ignore="UnusedResources">"X: "</string>
     <string name="y_label" tools:ignore="UnusedResources">"Y: "</string>
     <string name="brick_set_x" tools:ignore="UnusedResources">"ตั้งค่า X เป็น"</string>
@@ -776,19 +776,19 @@
     <string name="brick_set_gravity_unit" tools:ignore="UnusedResources">ขั้นตอน / วินาที²</string>
     <string name="brick_set_velocity_to" tools:ignore="UnusedResources">"ตั้งค่าความเร็วเป็น"</string>
     <string name="brick_set_velocity_unit" tools:ignore="UnusedResources">ขั้นตอน / วินาที</string>
-    <string name="brick_turn_speed_unit" tools:ignore="UnusedResources">degrees/second</string>
-    <string name="brick_set_friction" tools:ignore="UnusedResources">"Set friction to"</string>
-    <string name="brick_set_bounce_factor" tools:ignore="UnusedResources">"Set bounce factor to"</string>
-    <string name="brick_rotate_left" tools:ignore="UnusedResources">"Spin left"</string>
-    <string name="brick_rotate_right" tools:ignore="UnusedResources">"Spin right"</string>
+    <string name="brick_turn_speed_unit" tools:ignore="UnusedResources">องศา / วินาที</string>
+    <string name="brick_set_friction" tools:ignore="UnusedResources">" ตั้งค่าความเสียดทานเป็น"</string>
+    <string name="brick_set_bounce_factor" tools:ignore="UnusedResources">"ตั้งค่า Bounce Factor เป็น"</string>
+    <string name="brick_rotate_left" tools:ignore="UnusedResources">"หมุนไปทางซ้าย"</string>
+    <string name="brick_rotate_right" tools:ignore="UnusedResources">"หมุนไปทางขวา"</string>
     <!-- Look bricks -->
     <string name="brick_set_look" tools:ignore="UnusedResources">เปลี่ยนรูปลักษณ์เป็น</string>
-    <string name="brick_set_look_by_index" tools:ignore="UnusedResources">Switch to look with number</string>
+    <string name="brick_set_look_by_index" tools:ignore="UnusedResources">สลับไปมองด้วยตัวเลข</string>
     <string name="brick_and_wait">และรอ</string>
     <string name="brick_set_background" tools:ignore="UnusedResources">ตั้งค่าพื้นหลัง</string>
-    <string name="brick_set_background_and_wait" tools:ignore="UnusedResources">Set background and wait</string>
-    <string name="brick_set_background_by_index" tools:ignore="UnusedResources">Set background to number</string>
-    <string name="brick_when_background" tools:ignore="UnusedResources">When background changes to</string>
+    <string name="brick_set_background_and_wait" tools:ignore="UnusedResources">ตั้งค่าพื้นหลังและรอ</string>
+    <string name="brick_set_background_by_index" tools:ignore="UnusedResources">ตั้งค่าพื้นหลังเป็นตัวเลข</string>
+    <string name="brick_when_background" tools:ignore="UnusedResources">เมื่อพื้นหลังเปลี่ยนเป็น</string>
     <string name="brick_set_size_to" tools:ignore="UnusedResources">ตั้งขนาดให้เป็น</string>
     <string name="brick_change_size_by" tools:ignore="UnusedResources">เปลี่ยนขนาดทีละ</string>
     <string name="brick_hide" tools:ignore="UnusedResources">ซ่อน</string>
@@ -856,21 +856,21 @@
     <string name="set_instrument_to" tools:ignore="UnusedResources">ตั้งค่าเครื่องมือเป็น</string>
     <string name="set_tempo_to" tools:ignore="UnusedResources">ตั้งเวลาเป็น</string>
     <string name="change_tempo_by" tools:ignore="UnusedResources">เปลี่ยนจังหวะโดย</string>
-    <string name="pause_for" tools:ignore="UnusedResources">Pause for</string>
+    <string name="pause_for" tools:ignore="UnusedResources">หยุดชั่วคราวสำหรับ</string>
     <string name="play_drum" tools:ignore="UnusedResources">เล่นกลอง</string>
-    <string name="beats" tools:ignore="UnusedResources">beats</string>
+    <string name="beats" tools:ignore="UnusedResources">เต้น</string>
     <string name="play_note" tools:ignore="UnusedResources">เล่นบันทึก</string>
     <string name="for_string" tools:ignore="UnusedResources">สำหรับ</string>
     <!--  -->
     <!-- Embroidery bricks -->
     <string name="brick_stitch" tools:ignore="UnusedResources">ตะเข็บ</string>
-    <string name="brick_running_stitch" tools:ignore="UnusedResources">Start running stitch with length</string>
-    <string name="brick_zigzag_stitch" tools:ignore="UnusedResources">Start zigzag stitch with length</string>
+    <string name="brick_running_stitch" tools:ignore="UnusedResources">เริ่มใช้ตะเข็บที่มีความยาว</string>
+    <string name="brick_zigzag_stitch" tools:ignore="UnusedResources">เริ่มเย็บซิกแซกด้วยความยาว</string>
     <string name="brick_zigzag_stitch_width" tools:ignore="UnusedResources">และความกว้าง</string>
-    <string name="brick_triple_stitch" tools:ignore="UnusedResources">Start triple stitch with length</string>
-    <string name="brick_stop_stitch" tools:ignore="UnusedResources">Stop current stitch</string>
+    <string name="brick_triple_stitch" tools:ignore="UnusedResources">เริ่มเย็บสามครั้งด้วยความยาว</string>
+    <string name="brick_stop_stitch" tools:ignore="UnusedResources">หยุดตะเข็บปัจจุบัน</string>
     <string name="brick_write_embroidery" tools:ignore="UnusedResources">เขียนข้อมูลการปักลงในไฟล์</string>
-    <string name="brick_default_embroidery_file">embroidery.dst</string>
+    <string name="brick_default_embroidery_file">เย็บปักถักร้อย.dst</string>
     <string name="brick_sew_up" tools:ignore="UnusedResources">เย็บ</string>
     <string name="brick_thread_color">ตั้งค่าสีเป็น</string>
     <!--  -->
@@ -908,7 +908,7 @@
     <string name="brick_say_bubble" tools:ignore="UnusedResources">พูด</string>
     <string name="brick_think_say_for_text" tools:ignore="UnusedResources">สำหรับ</string>
     <string name="brick_forever" tools:ignore="UnusedResources">ตลอดไป</string>
-    <string name="brick_loop_for_values_from" tools:ignore="UnusedResources">For values from</string>
+    <string name="brick_loop_for_values_from" tools:ignore="UnusedResources">สำหรับค่าจาก</string>
     <string name="brick_loop_for_each_value_from" tools:ignore="UnusedResources">สำหรับแต่ละค่าจาก</string>
     <string name="brick_loop_in" tools:ignore="UnusedResources">ใน</string>
     <string name="brick_loop_to" tools:ignore="UnusedResources">กำหนดความหมาย</string>
@@ -923,7 +923,7 @@
     <string name="brick_is_equal_to" tools:ignore="UnusedResources">เท่ากับที่คาดไว้</string>
     <string name="brick_wait_till_idle" tools:ignore="UnusedResources">รอจนกระทั่งสคริปต์อื่น ๆ หยุดทำงาน</string>
     <string name="brick_tap_at" tools:ignore="UnusedResources">"แตะครั้งเดียวที่"</string>
-    <string name="brick_touch_at" tools:ignore="UnusedResources">"Touch at"</string>
+    <string name="brick_touch_at" tools:ignore="UnusedResources">"แตะที่"</string>
     <string name="brick_tap_for" tools:ignore="UnusedResources">"สำหรับ"</string>
     <string name="brick_touch_slide" tools:ignore="UnusedResources">"แตะและเลื่อน"</string>
     <string name="brick_touch_from_x" tools:ignore="UnusedResources">"จาก x:"</string>
@@ -956,7 +956,7 @@
     <string name="brick_write_variable_on_device" tools:ignore="UnusedResources">เขียนตัวแปรบนอุปกรณ์</string>
     <string name="brick_read_variable_from_device" tools:ignore="UnusedResources">อ่านตัวแปรจากอุปกรณ์</string>
     <string name="brick_write_variable_to_file_top" tools:ignore="UnusedResources">เขียนตัวแปร</string>
-    <string name="brick_write_variable_to_file_bottom" tools:ignore="UnusedResources">to file</string>
+    <string name="brick_write_variable_to_file_bottom" tools:ignore="UnusedResources">ไปยังไฟล์</string>
     <string name="brick_write_variable_to_file_default_value">variable.txt</string>
     <string name="brick_write_variable_to_file_success">"เขียนข้อมูลไปยัง %1$s สำเร็จแล้ว"</string>
     <string name="brick_read_variable_from_file_top" tools:ignore="UnusedResources">อ่านตัวแปร</string>
@@ -967,7 +967,7 @@
     <string name="brick_write_list_on_device" tools:ignore="UnusedResources">เขียนรายการบนอุปกรณ์</string>
     <string name="brick_read_list_from_device" tools:ignore="UnusedResources">อ่านรายการจากอุปกรณ์</string>
     <string name="brick_note_default_value">เพิ่มความคิดเห็นที่นี่&#8230;</string>
-    <string name="brick_think_bubble_default_value">Hmmmm!</string>
+    <string name="brick_think_bubble_default_value">อืม!</string>
     <string name="brick_say_bubble_default_value">สวัสดี!</string>
     <string name="brick_broadcast_default_value">"ข้อความ 1"</string>
     <string name="brick_add_item_to_userlist_add" tools:ignore="UnusedResources">เพิ่ม</string>
@@ -1017,10 +1017,10 @@
     <string name="guitar">กีตาร์</string>
     <string name="electric_guitar">กีต้าร์ไฟฟ้า</string>
     <string name="bass">เบส</string>
-    <string name="pizzicato">pizzicato</string>
-    <string name="synth_pad">synth pad</string>
+    <string name="pizzicato">พิซซ่า</string>
+    <string name="synth_pad">แผ่น Synth</string>
     <string name="choir">นักร้องประสานเสียง</string>
-    <string name="synth_lead">synth lead</string>
+    <string name="synth_lead">นำไปสู่การสังเคราะห์</string>
     <string name="wooden_flute">ขลุ่ยไม้</string>
     <string name="trombone">ทรอมโบน</string>
     <string name="saxophone">แซกโซโฟน</string>
@@ -1034,7 +1034,7 @@
     <string name="snare_drum">กลองสแนร์</string>
     <string name="bass_drum">กลองเบส</string>
     <string name="side_stick">ไม้ด้านข้าง</string>
-    <string name="crash_cymbal">crash cymbal</string>
+    <string name="crash_cymbal">ฉิ่งผิดพลาด</string>
     <string name="open_hi_hat">เปิด hi-hat</string>
     <string name="closed_hi_hat">ปิด hi-hat</string>
     <string name="tambourine">รำมะนา</string>
@@ -1091,10 +1091,10 @@
     <string name="drone_brick_set_x">X:</string>
     <!--  -->
     <!-- Drone config spinner values  -->
-    <string name="drone_config_indoor_with_hull">indoor with hull</string>
-    <string name="drone_config_indoor_without_hull">indoor without hull</string>
-    <string name="drone_config_outdoor_with_hull">outdoor with hull</string>
-    <string name="drone_config_outdoor_without_hull">outdoor without hull</string>
+    <string name="drone_config_indoor_with_hull">ในร่มพร้อมตัวถัง</string>
+    <string name="drone_config_indoor_without_hull">ในร่มไม่มีตัวถัง</string>
+    <string name="drone_config_outdoor_with_hull">กลางแจ้งพร้อมตัวถัง</string>
+    <string name="drone_config_outdoor_without_hull">กลางแจ้งไม่มีตัวถัง</string>
     <!-- Drone altitude limit values  -->
     <string name="drone_set_altitude_max_3m">3 เมตร</string>
     <string name="drone_set_altitude_max_5m">5 เมตร</string>
@@ -1156,7 +1156,7 @@
     <string name="error_rename_incompatible_project">ไม่สามารถเปลี่ยนชื่อโครงการที่เข้ากันไม่ได้</string>
     <string name="error_embroidery_file_export">เกิดข้อผิดพลาดบางอย่างขณะแชร์ไฟล์การปัก</string>
     <string name="error_embroidery_file_write">เกิดข้อผิดพลาดขณะเขียนไฟล์ปัก</string>
-    <string name="error_embroidery_data_not_found">Embroidery is missing.</string>
+    <string name="error_embroidery_data_not_found">เย็บปักถักร้อยขาดหายไป</string>
     <string name="error_unknown_error">บางอย่างผิดพลาด.</string>
     <string name="error_gps_not_available">ไม่มีข้อมูลตำแหน่งทางภูมิศาสตร์</string>
     <string name="error_set_description">เกิดข้อผิดพลาดขณะบันทึกคำอธิบายใหม่</string>
@@ -1184,75 +1184,75 @@
     <string name="brick_arduino_set_pin_value_to" tools:ignore="UnusedResources">กำหนดความหมาย</string>
     <!--  -->
     <!-- Raspi Bricks -->
-    <string name="brick_raspi_select_digital_value" tools:ignore="UnusedResources">Set Raspberry Pi pin</string>
+    <string name="brick_raspi_select_digital_value" tools:ignore="UnusedResources">ตั้งค่าพิน Raspberry Pi</string>
     <string name="brick_raspi_set_pin_value_to" tools:ignore="UnusedResources">กำหนดความหมาย</string>
-    <string name="brick_raspi_if_begin" tools:ignore="UnusedResources">If Raspberry Pi pin</string>
+    <string name="brick_raspi_if_begin" tools:ignore="UnusedResources">ถ้าขา Raspberry Pi</string>
     <string name="brick_raspi_if_begin_second_part" tools:ignore="UnusedResources">เป็นจริงแล้ว</string>
-    <string name="brick_raspi_when_begin" tools:ignore="UnusedResources">When Raspberry Pi pin</string>
+    <string name="brick_raspi_when_begin" tools:ignore="UnusedResources">เมื่อ Raspberry Pi พิน</string>
     <string name="brick_raspi_when_equals" tools:ignore="UnusedResources">เปลี่ยนเป็น</string>
-    <string name="brick_raspi_pressed_text">high</string>
-    <string name="brick_raspi_released_text">low</string>
-    <string name="brick_raspi_set_pwm" tools:ignore="UnusedResources">Set Raspberry Pi PWM pin</string>
+    <string name="brick_raspi_pressed_text">สูง</string>
+    <string name="brick_raspi_released_text">ต่ำ</string>
+    <string name="brick_raspi_set_pwm" tools:ignore="UnusedResources">ตั้งขา Raspberry Pi PWM</string>
     <!--  -->
     <!-- Raspi Settings -->
-    <string name="raspi_settings_title_name">Raspberry Pi settings</string>
-    <string name="raspi_settings_gpio_version">GPIO Version</string>
-    <string name="error_connecting_to">Error: Could not connect to %s : %d</string>
+    <string name="raspi_settings_title_name">การตั้งค่า Raspberry Pi</string>
+    <string name="raspi_settings_gpio_version">เวอร์ชัน GPIO</string>
+    <string name="error_connecting_to">ข้อผิดพลาด: ไม่สามารถเชื่อมต่อกับ %s: %d</string>
     <!--  -->
     <!-- Lego Mindstorms Strings -->
-    <string name="nxt_brick_motor_move" tools:ignore="UnusedResources">Set NXT motor</string>
+    <string name="nxt_brick_motor_move" tools:ignore="UnusedResources">ตั้งค่ามอเตอร์ NXT</string>
     <string name="nxt_motor_speed_to" tools:ignore="UnusedResources">กำหนดความหมาย</string>
-    <string name="nxt_motor_speed" tools:ignore="UnusedResources">speed</string>
-    <string name="nxt_brick_motor_turn_angle" tools:ignore="UnusedResources">Turn NXT motor</string>
+    <string name="nxt_motor_speed" tools:ignore="UnusedResources">ความเร็ว</string>
+    <string name="nxt_brick_motor_turn_angle" tools:ignore="UnusedResources">หมุนมอเตอร์ NXT</string>
     <string name="nxt_motor_move_by" tools:ignore="UnusedResources">โดย</string>
-    <string name="nxt_motor_stop" tools:ignore="UnusedResources">Stop NXT motor</string>
-    <string name="nxt_play_tone" tools:ignore="UnusedResources">Play NXT tone</string>
-    <string name="nxt_tone_duration" tools:ignore="UnusedResources">Duration</string>
+    <string name="nxt_motor_stop" tools:ignore="UnusedResources">หยุดมอเตอร์ NXT</string>
+    <string name="nxt_play_tone" tools:ignore="UnusedResources">เล่นเสียง NXT</string>
+    <string name="nxt_tone_duration" tools:ignore="UnusedResources">ระยะเวลา</string>
     <string name="nxt_tone_frequency" tools:ignore="UnusedResources">ความถี่</string>
     <string name="nxt_tone_hundred_hz" tools:ignore="UnusedResources">x100Hz</string>
     <string name="nxt_motor_a">A</string>
     <string name="nxt_motor_b">B</string>
     <string name="nxt_motor_c">C</string>
-    <string name="nxt_motor_b_and_c">B+C</string>
+    <string name="nxt_motor_b_and_c">B + C</string>
     <string name="nxt_motor_all">ทั้งหมด</string>
-    <string name="nxt_choose_sensor_1">Sensor connected on port 1</string>
-    <string name="nxt_choose_sensor_2">Sensor connected on port 2</string>
-    <string name="nxt_choose_sensor_3">Sensor connected on port 3</string>
-    <string name="nxt_choose_sensor_4">Sensor connected on port 4</string>
-    <string name="nxt_no_sensor">none</string>
-    <string name="nxt_sensor_touch">NXT touch sensor</string>
-    <string name="nxt_sensor_sound">NXT sound sensor</string>
-    <string name="nxt_sensor_light">NXT light sensor</string>
-    <string name="nxt_sensor_light_active">NXT light sensor active</string>
-    <string name="nxt_sensor_ultrasonic">NXT ultrasonic sensor</string>
-    <string name="nxt_sensor_not_found">Sensor not found!</string>
-    <string name="lego_nxt_sensor_config_info_title">NXT sensor configuration</string>
-    <string name="preference_disable_nxt_info_dialog">Disable info dialog</string>
-    <string name="preference_disable_nxt_info_dialog_description">Project specific NXT settings are not shown when
-        opening a project.</string>
-    <string name="preference_title_mindstorms_nxt_sensors_description">The mapping of NXT sensors to ports is project
-        specific and can only be configured for opened projects.</string>
-    <string name="lego_nxt_sensor_config_info_text">The current project uses Lego Mindstorms NXT bricks or sensors. For
-        proper functionality please connect the sensors to the robot as follows</string>
-    <string name="lego_port_1">Port 1</string>
-    <string name="lego_port_2">Port 2</string>
-    <string name="lego_port_3">Port 3</string>
-    <string name="lego_port_4">Port 4</string>
-    <string name="lego_sensor_config_dont_show_again">Do not show this message again.</string>
-    <string name="lego_sensor_port_config_dialog_title">Choose a port for connecting to %1$s.</string>
-    <string name="lego_ev3_sensor_config_info_title">EV3 sensor configuration</string>
-    <string name="preference_disable_ev3_info_dialog_description">Project specific EV3 settings are not shown when
-        opening a project.</string>
-    <string name="preference_title_mindstorms_ev3_sensors_description">The mapping of EV3 sensors to ports is project
-        specific and can only be configured for opened projects.</string>
-    <string name="lego_ev3_sensor_config_info_text">The current project uses Lego Mindstorms EV3 bricks or sensors. For
-        proper functionality please connect the sensors to the robot as follows</string>
-    <string name="ev3_choose_sensor_1">Sensor connected on port 1</string>
-    <string name="ev3_choose_sensor_2">Sensor connected on port 2</string>
-    <string name="ev3_choose_sensor_3">Sensor connected on port 3</string>
-    <string name="ev3_choose_sensor_4">Sensor connected on port 4</string>
-    <string name="ev3_no_sensor">none</string>
-    <string name="ev3_sensor_touch">EV3 touch sensor</string>
+    <string name="nxt_choose_sensor_1">เซ็นเซอร์เชื่อมต่อที่พอร์ต 1</string>
+    <string name="nxt_choose_sensor_2">เซ็นเซอร์เชื่อมต่อที่พอร์ต 2</string>
+    <string name="nxt_choose_sensor_3">เซ็นเซอร์เชื่อมต่อที่พอร์ต 3</string>
+    <string name="nxt_choose_sensor_4">เซ็นเซอร์เชื่อมต่อที่พอร์ต 4</string>
+    <string name="nxt_no_sensor">ไม่มี</string>
+    <string name="nxt_sensor_touch">เซ็นเซอร์สัมผัส NXT</string>
+    <string name="nxt_sensor_sound">เซ็นเซอร์เสียง NXT</string>
+    <string name="nxt_sensor_light">เซ็นเซอร์แสง NXT</string>
+    <string name="nxt_sensor_light_active">เซ็นเซอร์แสง NXT ทำงานอยู่</string>
+    <string name="nxt_sensor_ultrasonic">เซ็นเซอร์อัลตราโซนิก NXT</string>
+    <string name="nxt_sensor_not_found">ไม่พบเซ็นเซอร์!</string>
+    <string name="lego_nxt_sensor_config_info_title">การกำหนดค่าเซ็นเซอร์ NXT</string>
+    <string name="preference_disable_nxt_info_dialog">ปิดใช้งานกล่องโต้ตอบข้อมูล</string>
+    <string name="preference_disable_nxt_info_dialog_description">การตั้งค่า NXT เฉพาะโปรเจ็กต์จะไม่แสดงเมื่อ
+        เปิดโครงการ</string>
+    <string name="preference_title_mindstorms_nxt_sensors_description">การแมปเซ็นเซอร์ NXT กับพอร์ตเป็นโปรเจ็กต์
+        เฉพาะและสามารถกำหนดค่าได้สำหรับโครงการที่เปิดเท่านั้น</string>
+    <string name="lego_nxt_sensor_config_info_text">โครงการปัจจุบันใช้อิฐ Lego Mindstorms NXT หรือเซ็นเซอร์ สำหรับ
+        การทำงานที่เหมาะสมโปรดเชื่อมต่อเซ็นเซอร์กับหุ่นยนต์ดังต่อไปนี้</string>
+    <string name="lego_port_1">พอร์ต 1</string>
+    <string name="lego_port_2">พอร์ต 2</string>
+    <string name="lego_port_3">พอร์ต 3</string>
+    <string name="lego_port_4">พอร์ต 4</string>
+    <string name="lego_sensor_config_dont_show_again">อย่าแสดงข้อความนี้อีก.</string>
+    <string name="lego_sensor_port_config_dialog_title">เลือกพอร์ตสำหรับเชื่อมต่อกับ %1$s</string>
+    <string name="lego_ev3_sensor_config_info_title">การกำหนดค่าเซ็นเซอร์ EV3</string>
+    <string name="preference_disable_ev3_info_dialog_description">การตั้งค่า EV3 เฉพาะโปรเจ็กต์จะไม่แสดงเมื่อ
+        เปิดโครงการ</string>
+    <string name="preference_title_mindstorms_ev3_sensors_description">การจับคู่เซ็นเซอร์ EV3 กับพอร์ตเป็นโครงการ
+        เฉพาะและสามารถกำหนดค่าได้สำหรับโครงการที่เปิดเท่านั้น</string>
+    <string name="lego_ev3_sensor_config_info_text">โครงการปัจจุบันใช้อิฐ Lego Mindstorms EV3 หรือเซ็นเซอร์ สำหรับ
+        การทำงานที่เหมาะสมโปรดเชื่อมต่อเซ็นเซอร์กับหุ่นยนต์ดังต่อไปนี้</string>
+    <string name="ev3_choose_sensor_1">เซ็นเซอร์เชื่อมต่อที่พอร์ต 1</string>
+    <string name="ev3_choose_sensor_2">เซ็นเซอร์เชื่อมต่อที่พอร์ต 2</string>
+    <string name="ev3_choose_sensor_3">เซ็นเซอร์เชื่อมต่อที่พอร์ต 3</string>
+    <string name="ev3_choose_sensor_4">เซ็นเซอร์เชื่อมต่อที่พอร์ต 4</string>
+    <string name="ev3_no_sensor">ไม่มี</string>
+    <string name="ev3_sensor_touch">เซ็นเซอร์สัมผัส EV3</string>
     <string name="ev3_sensor_infrared">เซ็นเซอร์อินฟราเรด EV3</string>
     <string name="ev3_sensor_color">เซ็นเซอร์สี EV3</string>
     <string name="ev3_sensor_color_ambient">สภาพแวดล้อมของเซ็นเซอร์สี EV3</string>
@@ -1268,7 +1268,7 @@
     <string name="ev3_motor_b">B</string>
     <string name="ev3_motor_c">C</string>
     <string name="ev3_motor_d">วัน</string>
-    <string name="ev3_motor_b_and_c">B+C</string>
+    <string name="ev3_motor_b_and_c">B + C</string>
     <string name="ev3_motor_all">ทั้งหมด</string>
     <string name="ev3_play_tone" tools:ignore="UnusedResources">เล่นเสียง EV3</string>
     <string name="ev3_tone_duration_for" tools:ignore="UnusedResources">สำหรับ</string>
@@ -1600,6 +1600,7 @@
     <string name="formula_editor_object_brightness" tools:ignore="UnusedResources">ความสว่าง</string>
     <string name="formula_editor_object_size" tools:ignore="UnusedResources">ขนาด</string>
     <string name="formula_editor_object_rotation" tools:ignore="UnusedResources">ทิศทาง</string>
+    <string name="formula_editor_object_rotation_look" tools:ignore="UnusedResources">look direction</string>
     <string name="formula_editor_object_layer" tools:ignore="UnusedResources">ชั้น</string>
     <string name="formula_editor_object_x_velocity" tools:ignore="UnusedResources">ความเร็ว x</string>
     <string name="formula_editor_object_y_velocity" tools:ignore="UnusedResources">ความเร็ว y</string>
@@ -1622,15 +1623,15 @@
     <string name="formula_editor_logic_comparison">ผู้ประกอบการเปรียบเทียบ</string>
     <string name="formula_editor_object_look">Look properties</string>
     <string name="formula_editor_object_movement">คุณสมบัติเคลื่อนที่</string>
-    <string name="formula_editor_device_face_detection">Face detection</string>
-    <string name="formula_editor_device_text_recognition">Text recognition</string>
+    <string name="formula_editor_device_face_detection">ตรวจจับใบหน้า</string>
+    <string name="formula_editor_device_text_recognition">การจดจำข้อความ</string>
     <string name="formula_editor_device_date_and_time">วันและเวลา</string>
     <string name="formula_editor_device_touch_detection">ตรวจจับการสัมผัส</string>
     <string name="formula_editor_device_lego_nxt">Lego NXT</string>
     <string name="formula_editor_device_lego_ev3">Lego Mindstorms EV3</string>
     <string name="formula_editor_device_arduino">Arduino</string>
-    <string name="formula_editor_device_phiro">Phiro</string>
-    <string name="formula_editor_device_raspberry">Raspberry Pi</string>
+    <string name="formula_editor_device_phiro">ฟีโร</string>
+    <string name="formula_editor_device_raspberry">ราสเบอร์รี่ Pi</string>
     <string name="formula_editor_device_drone">โดรน</string>
     <string name="formula_editor_device_nfc">NFC</string>
     <string name="formula_editor_device_cast">Chromecast</string>

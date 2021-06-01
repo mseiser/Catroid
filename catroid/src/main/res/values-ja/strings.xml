@@ -1615,6 +1615,7 @@
     <string name="formula_editor_object_brightness" tools:ignore="UnusedResources">輝度</string>
     <string name="formula_editor_object_size" tools:ignore="UnusedResources">サイズ</string>
     <string name="formula_editor_object_rotation" tools:ignore="UnusedResources">方向</string>
+    <string name="formula_editor_object_rotation_look" tools:ignore="UnusedResources">look direction</string>
     <string name="formula_editor_object_layer" tools:ignore="UnusedResources">レイヤー</string>
     <string name="formula_editor_object_x_velocity" tools:ignore="UnusedResources">倍速</string>
     <string name="formula_editor_object_y_velocity" tools:ignore="UnusedResources">Y速度</string>

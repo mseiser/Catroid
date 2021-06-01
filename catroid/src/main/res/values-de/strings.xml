@@ -1642,6 +1642,7 @@
     <string name="formula_editor_object_brightness" tools:ignore="UnusedResources">Helligkeit</string>
     <string name="formula_editor_object_size" tools:ignore="UnusedResources">Größe</string>
     <string name="formula_editor_object_rotation" tools:ignore="UnusedResources">Richtung</string>
+    <string name="formula_editor_object_rotation_look" tools:ignore="UnusedResources">look direction</string>
     <string name="formula_editor_object_layer" tools:ignore="UnusedResources">Ebene</string>
     <string name="formula_editor_object_x_velocity" tools:ignore="UnusedResources">x Geschwindigkeit</string>
     <string name="formula_editor_object_y_velocity" tools:ignore="UnusedResources">y Geschwindigkeit</string>

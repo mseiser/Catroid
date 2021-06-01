@@ -1665,6 +1665,7 @@ doit avoir accès en lecture et en écriture à la mémoire locale. Vous pouvez 
     <string name="formula_editor_object_brightness" tools:ignore="UnusedResources">luminosité</string>
     <string name="formula_editor_object_size" tools:ignore="UnusedResources">taille</string>
     <string name="formula_editor_object_rotation" tools:ignore="UnusedResources">direction</string>
+    <string name="formula_editor_object_rotation_look" tools:ignore="UnusedResources">look direction</string>
     <string name="formula_editor_object_layer" tools:ignore="UnusedResources">couche</string>
     <string name="formula_editor_object_x_velocity" tools:ignore="UnusedResources">vélocité x</string>
     <string name="formula_editor_object_y_velocity" tools:ignore="UnusedResources">vélocité y</string>
