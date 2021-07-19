@@ -22,6 +22,7 @@
  */
 package org.catrobat.catroid.ui;
 
+import android.annotation.SuppressLint;
 import android.content.ActivityNotFoundException;
 import android.content.Intent;
 import android.net.Uri;
@@ -64,6 +65,7 @@ import java.io.IOException;
 import java.io.InputStream;
 
 import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.view.menu.MenuBuilder;
 import kotlin.Lazy;
 
 import static org.catrobat.catroid.common.FlavoredConstants.CATROBAT_HELP_URL;
@@ -244,6 +246,7 @@ public class MainMenuActivity extends BaseCastActivity implements
 		}
 	}
 
+	@SuppressLint("RestrictedApi")
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		getMenuInflater().inflate(R.menu.menu_main_menu, menu);
@@ -257,6 +260,11 @@ public class MainMenuActivity extends BaseCastActivity implements
 				scratchConverter.length(), scratchConverterBeta.length(),
 				Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
 		menu.findItem(R.id.menu_scratch_converter).setTitle(scratchConverterBeta);
+
+		if (menu instanceof MenuBuilder) {
+			MenuBuilder m = (MenuBuilder) menu;
+			m.setOptionalIconsVisible(true);
+		}
 		return true;
 	}
 

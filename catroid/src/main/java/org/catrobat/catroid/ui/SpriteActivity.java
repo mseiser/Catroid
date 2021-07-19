@@ -22,6 +22,7 @@
  */
 package org.catrobat.catroid.ui;
 
+import android.annotation.SuppressLint;
 import android.content.ClipData;
 import android.content.ClipboardManager;
 import android.content.Intent;
@@ -80,6 +81,7 @@ import java.util.List;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.view.menu.MenuBuilder;
 import androidx.fragment.app.Fragment;
 
 import static org.catrobat.catroid.common.Constants.DEFAULT_IMAGE_EXTENSION;
@@ -202,10 +204,16 @@ public class SpriteActivity extends BaseActivity {
 		return getSupportFragmentManager().findFragmentById(R.id.fragment_container);
 	}
 
+	@SuppressLint("RestrictedApi")
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		getMenuInflater().inflate(R.menu.menu_script_activity, menu);
 		currentMenu = menu;
+
+		if (menu instanceof MenuBuilder) {
+			MenuBuilder m = (MenuBuilder) menu;
+			m.setOptionalIconsVisible(true);
+		}
 		return super.onCreateOptionsMenu(menu);
 	}
 

@@ -22,6 +22,7 @@
  */
 package org.catrobat.catroid.ui;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -33,6 +34,7 @@ import org.catrobat.catroid.R;
 import org.catrobat.catroid.ui.recyclerview.dialog.NewProjectDialogFragment;
 import org.catrobat.catroid.ui.recyclerview.fragment.ProjectListFragment;
 
+import androidx.appcompat.view.menu.MenuBuilder;
 import androidx.fragment.app.Fragment;
 
 public class ProjectListActivity extends BaseCastActivity {
@@ -71,10 +73,15 @@ public class ProjectListActivity extends BaseCastActivity {
 				.commit();
 	}
 
+	@SuppressLint("RestrictedApi")
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		getMenuInflater().inflate(R.menu.menu_projects_activity, menu);
 		menu.findItem(R.id.merge).setVisible(BuildConfig.FEATURE_MERGE_ENABLED);
+		if (menu instanceof MenuBuilder) {
+			MenuBuilder m = (MenuBuilder) menu;
+			m.setOptionalIconsVisible(true);
+		}
 		return super.onCreateOptionsMenu(menu);
 	}
 

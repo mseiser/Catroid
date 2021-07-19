@@ -23,7 +23,9 @@
 
 package org.catrobat.catroid.ui.recyclerview.fragment
 
+import android.annotation.SuppressLint
 import android.content.DialogInterface
+import android.os.Build
 import android.os.Bundle
 import android.view.ActionMode
 import android.view.LayoutInflater
@@ -34,8 +36,10 @@ import android.view.ViewGroup
 import android.widget.PopupMenu
 import android.widget.TextView
 import androidx.annotation.IntDef
+import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.view.menu.MenuBuilder
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.AdapterDataObserver
@@ -76,6 +80,7 @@ class DataListFragment : Fragment(),
         this.formulaEditorDataInterface = formulaEditorDataInterface
     }
 
+    @SuppressLint("RestrictedApi")
     override fun onCreateActionMode(
         mode: ActionMode,
         menu: Menu
@@ -86,6 +91,9 @@ class DataListFragment : Fragment(),
         }
         val inflater = mode.menuInflater
         inflater.inflate(R.menu.context_menu, menu)
+        if (menu is MenuBuilder) {
+            menu.setOptionalIconsVisible(true)
+        }
         adapter?.showCheckBoxes(true)
         adapter?.updateDataSet()
         return true
@@ -400,6 +408,7 @@ class DataListFragment : Fragment(),
         }
     }
 
+    @RequiresApi(Build.VERSION_CODES.Q)
     override fun onSettingsClick(item: UserData<*>, view: View?) {
         if (item is UserDefinedBrickInput) {
             return
@@ -447,6 +456,7 @@ class DataListFragment : Fragment(),
                 }
                 true
             }
+            popupMenu.setForceShowIcon(true)
             popupMenu.show()
         }
     }

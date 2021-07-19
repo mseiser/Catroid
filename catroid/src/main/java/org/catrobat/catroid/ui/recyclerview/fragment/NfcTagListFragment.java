@@ -26,6 +26,7 @@ package org.catrobat.catroid.ui.recyclerview.fragment;
 import android.app.PendingIntent;
 import android.content.Intent;
 import android.nfc.NfcAdapter;
+import android.os.Build;
 import android.os.Bundle;
 import android.provider.Settings;
 import android.util.Log;
@@ -47,6 +48,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import androidx.annotation.PluralsRes;
+import androidx.annotation.RequiresApi;
 
 public class NfcTagListFragment extends RecyclerViewFragment<NfcTagData> {
 
@@ -199,6 +201,7 @@ public class NfcTagListFragment extends RecyclerViewFragment<NfcTagData> {
 		}
 	}
 
+	@RequiresApi(api = Build.VERSION_CODES.Q)
 	@Override
 	public void onSettingsClick(NfcTagData item, View view) {
 		PopupMenu popupMenu = new PopupMenu(getContext(), view);
@@ -231,6 +234,7 @@ public class NfcTagListFragment extends RecyclerViewFragment<NfcTagData> {
 		popupMenu.getMenu().findItem(R.id.new_scene).setVisible(false);
 		popupMenu.getMenu().findItem(R.id.show_details).setVisible(false);
 		popupMenu.getMenu().findItem(R.id.project_options).setVisible(false);
+		popupMenu.setForceShowIcon(true);
 		popupMenu.show();
 	}
 }

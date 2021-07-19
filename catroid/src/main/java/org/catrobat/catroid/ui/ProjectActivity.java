@@ -22,6 +22,7 @@
  */
 package org.catrobat.catroid.ui;
 
+import android.annotation.SuppressLint;
 import android.content.ClipData;
 import android.content.ClipboardManager;
 import android.content.Intent;
@@ -63,6 +64,7 @@ import org.catrobat.catroid.utils.Utils;
 import java.io.File;
 
 import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.view.menu.MenuBuilder;
 import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
@@ -148,9 +150,14 @@ public class ProjectActivity extends BaseCastActivity {
 		findViewById(R.id.fragment_container).setVisibility(show ? View.GONE : View.VISIBLE);
 	}
 
+	@SuppressLint("RestrictedApi")
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		getMenuInflater().inflate(R.menu.menu_project_activity, menu);
+		if (menu instanceof MenuBuilder) {
+			MenuBuilder m = (MenuBuilder) menu;
+			m.setOptionalIconsVisible(true);
+		}
 		return super.onCreateOptionsMenu(menu);
 	}
 

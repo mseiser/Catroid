@@ -23,9 +23,11 @@
 
 package org.catrobat.catroid.ui
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
+import androidx.appcompat.view.menu.MenuBuilder
 import org.catrobat.catroid.R
 import org.catrobat.catroid.ui.recyclerview.fragment.NfcTagListFragment
 
@@ -50,8 +52,12 @@ class NfcTagsActivity : BaseActivity() {
         }
     }
 
+    @SuppressLint("RestrictedApi")
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         menuInflater.inflate(R.menu.menu_script_activity, menu)
+        if (menu is MenuBuilder) {
+            menu.setOptionalIconsVisible(true)
+        }
         return super.onCreateOptionsMenu(menu)
     }
 }

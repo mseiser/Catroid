@@ -23,6 +23,7 @@
 package org.catrobat.catroid.ui.recyclerview.fragment;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -36,6 +37,9 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.ArrayAdapter;
+import android.widget.ListAdapter;
+import android.widget.TextView;
 
 import org.catrobat.catroid.BuildConfig;
 import org.catrobat.catroid.ProjectManager;
@@ -641,20 +645,72 @@ public class ScriptFragment extends ListFragment implements
 			listView.cancelHighlighting();
 			return;
 		}
+
 		List<Integer> options = getContextMenuItems(brick);
-		CharSequence[] items = new CharSequence[options.size()];
+		CharSequence[] names = new CharSequence[options.size()];
+		int[] icons = new int[options.size()];
 
 		for (int i = 0; i < options.size(); i++) {
-			items[i] = getString(options.get(i));
+			names[i] = getString(options.get(i));
+			icons[i] = getIconForItem(options.get(i));
 		}
 
 		View brickView = brick.getView(getContext());
 		brick.disableSpinners();
 
+		ListAdapter arrayAdapter = new ArrayAdapter(getContext(),
+				R.layout.alert_dialog_layout, R.id.title_option_item, options) {
+			TextView item;
+
+			public View getView(int position, View convertView, ViewGroup parent) {
+				final LayoutInflater inflater = (LayoutInflater) getContext()
+						.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+
+				if (convertView == null) {
+					convertView = inflater.inflate(
+							R.layout.alert_dialog_layout, parent, false);
+
+					item = (TextView) convertView
+							.findViewById(R.id.title_option_item);
+					convertView.setTag(item);
+				} else {
+					// view already defined, retrieve view holder
+					item = (TextView) convertView.getTag();
+				}
+
+				item.setText(names[position]);
+				item.setCompoundDrawablesWithIntrinsicBounds(icons[position], 0, 0, 0);
+				return convertView;
+			}
+		};
+
 		new AlertDialog.Builder(getContext())
-				.setCustomTitle(brickView)
-				.setItems(items, (dialog, which) -> handleContextMenuItemClick(options.get(which), brick, position))
-				.show();
+			.setCustomTitle(brickView)
+			.setAdapter(arrayAdapter, new DialogInterface.OnClickListener() {
+				@Override
+				public void onClick(DialogInterface dialog, int which) {
+					handleContextMenuItemClick(options.get(which), brick, position);
+				}
+			}).show();
+	}
+
+	private int getIconForItem(int itemId) {
+		switch (itemId) {
+			case R.string.backpack_add:
+				return R.drawable.ic_content_paste;
+			case R.string.brick_context_dialog_copy_brick:
+			case R.string.brick_context_dialog_copy_script:
+				return R.drawable.ic_content_copy;
+			case R.string.brick_context_dialog_delete_brick:
+			case R.string.brick_context_dialog_delete_script:
+				return R.drawable.ic_delete;
+			case R.string.brick_context_dialog_formula_edit_brick:
+				return R.drawable.ic_edit;
+			case R.string.brick_context_dialog_help:
+				return R.drawable.ic_main_menu_help;
+			default:
+				return R.drawable.ic_placeholder;
+		}
 	}
 
 	private List<Integer> getContextMenuItems(Brick brick) {

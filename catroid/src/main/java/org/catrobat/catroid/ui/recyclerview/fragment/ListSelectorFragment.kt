@@ -25,6 +25,7 @@ package org.catrobat.catroid.ui.recyclerview.fragment
 
 import android.content.Context
 import android.content.DialogInterface
+import android.os.Build
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.Menu
@@ -33,6 +34,7 @@ import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import android.widget.PopupMenu
+import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
@@ -47,11 +49,11 @@ import org.catrobat.catroid.ui.UiUtils
 import org.catrobat.catroid.ui.recyclerview.adapter.DataListAdapter
 import org.catrobat.catroid.ui.recyclerview.adapter.RVAdapter
 import org.catrobat.catroid.ui.recyclerview.dialog.TextInputDialog
+import org.catrobat.catroid.ui.recyclerview.dialog.textwatcher.DuplicateInputTextWatcher
 import org.catrobat.catroid.ui.recyclerview.viewholder.CheckableVH
 import org.catrobat.catroid.utils.ToastUtil
-import java.util.ArrayList
-import org.catrobat.catroid.ui.recyclerview.dialog.textwatcher.DuplicateInputTextWatcher
 import org.catrobat.catroid.utils.UserDataUtil
+import java.util.ArrayList
 
 class ListSelectorFragment : Fragment(), RVAdapter.SelectionListener,
     RVAdapter.OnItemClickListener<UserData<*>> {
@@ -269,21 +271,29 @@ class ListSelectorFragment : Fragment(), RVAdapter.SelectionListener,
         }
     }
 
+    @RequiresApi(Build.VERSION_CODES.Q)
     override fun onSettingsClick(item: UserData<*>, view: View?) {
-        val elementList = arrayOf<CharSequence>(getString(R.string.delete), getString(R.string.rename))
         val popupMenu = PopupMenu(context, view)
-        for (element: CharSequence in elementList) popupMenu.menu.add(element)
+        val itemList: MutableList<UserData<*>> = ArrayList()
+        itemList.add(item)
+
+        popupMenu.menuInflater.inflate(R.menu.menu_project_activity, popupMenu.menu)
         popupMenu.setOnMenuItemClickListener { menuItem ->
-            when (menuItem.title) {
-                getString(R.string.rename) -> showRenameDialog(
-                    listOf(item)
-                )
-                getString(R.string.delete) -> showDeleteAlert(
-                    listOf(item)
-                )
+            when (menuItem.itemId) {
+                R.id.rename -> showRenameDialog(listOf(item))
+                R.id.delete -> showDeleteAlert(listOf(item))
+                else -> {
+                }
             }
             true
         }
+        popupMenu.menu.findItem(R.id.backpack).isVisible = false
+        popupMenu.menu.findItem(R.id.copy).isVisible = false
+        popupMenu.menu.findItem(R.id.new_group).isVisible = false
+        popupMenu.menu.findItem(R.id.new_scene).isVisible = false
+        popupMenu.menu.findItem(R.id.show_details).isVisible = false
+        popupMenu.menu.findItem(R.id.project_options).isVisible = false
+        popupMenu.setForceShowIcon(true)
         popupMenu.show()
     }
 }

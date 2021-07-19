@@ -21,26 +21,14 @@
   ~ You should have received a copy of the GNU Affero General Public License
   ~ along with this program.  If not, see <http://www.gnu.org/licenses/>.
   -->
-<menu
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
-
-    <item
-        android:id="@+id/unpack"
-        android:title="@string/unpack"
-        app:showAsAction="never"
-        android:icon="@drawable/ic_placeholder"/>
-
-    <item
-        android:id="@+id/delete"
-        android:title="@string/delete"
-        app:showAsAction="never"
-        android:icon="@drawable/ic_delete"/>
-
-    <item
-        android:id="@+id/show_details"
-        android:title="@string/show_details"
-        app:showAsAction="never"
-        android:icon="@drawable/ic_placeholder"/>
-
-</menu>
+ <TextView xmlns:android="http://schemas.android.com/apk/res/android"
+     android:id="@+id/title_option_item"
+     android:text=""
+     android:layout_width="match_parent"
+     android:textSize="?attr/medium"
+     android:layout_height="wrap_content"
+     android:paddingBottom="8dp"
+     android:paddingTop="8dp"
+     android:paddingStart="24dp"
+     android:paddingEnd="0dp"
+     android:drawablePadding="20dp"/>

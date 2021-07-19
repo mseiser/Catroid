@@ -23,8 +23,10 @@
 
 package org.catrobat.catroid.ui.recyclerview.fragment;
 
+import android.annotation.SuppressLint;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.os.Build;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -57,6 +59,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import androidx.annotation.PluralsRes;
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.RecyclerView;
@@ -321,6 +324,8 @@ public class SpriteListFragment extends RecyclerViewFragment<Sprite> {
 		super.onItemLongClick(item, holder);
 	}
 
+	@RequiresApi(api = Build.VERSION_CODES.Q)
+	@SuppressLint("RestrictedApi")
 	@Override
 	public void onSettingsClick(Sprite item, View view) {
 		PopupMenu popupMenu = new PopupMenu(getContext(), view);
@@ -356,6 +361,7 @@ public class SpriteListFragment extends RecyclerViewFragment<Sprite> {
 		popupMenu.getMenu().findItem(R.id.new_scene).setVisible(false);
 		popupMenu.getMenu().findItem(R.id.show_details).setVisible(false);
 		popupMenu.getMenu().findItem(R.id.project_options).setVisible(false);
+		popupMenu.setForceShowIcon(true);
 		popupMenu.show();
 	}
 

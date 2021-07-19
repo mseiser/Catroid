@@ -26,6 +26,7 @@ package org.catrobat.catroid.ui.recyclerview.fragment;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.util.Log;
@@ -67,6 +68,7 @@ import java.util.Collections;
 import java.util.List;
 
 import androidx.annotation.PluralsRes;
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import kotlin.Unit;
 
@@ -417,6 +419,7 @@ public class ProjectListFragment extends RecyclerViewFragment<ProjectData> imple
 		onItemClick(item);
 	}
 
+	@RequiresApi(api = Build.VERSION_CODES.Q)
 	@Override
 	public void onSettingsClick(ProjectData item, View view) {
 		PopupMenu popupMenu = new PopupMenu(getContext(), view);
@@ -464,6 +467,7 @@ public class ProjectListFragment extends RecyclerViewFragment<ProjectData> imple
 		popupMenu.getMenu().findItem(R.id.new_group).setVisible(false);
 		popupMenu.getMenu().findItem(R.id.new_scene).setVisible(false);
 		popupMenu.getMenu().findItem(R.id.show_details).setVisible(false);
+		popupMenu.setForceShowIcon(true);
 		popupMenu.show();
 	}
 

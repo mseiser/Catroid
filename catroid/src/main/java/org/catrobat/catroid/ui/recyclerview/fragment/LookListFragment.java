@@ -26,6 +26,7 @@ package org.catrobat.catroid.ui.recyclerview.fragment;
 import android.app.Activity;
 import android.content.ComponentName;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
@@ -56,6 +57,7 @@ import java.util.List;
 
 import androidx.annotation.Nullable;
 import androidx.annotation.PluralsRes;
+import androidx.annotation.RequiresApi;
 
 import static android.app.Activity.RESULT_OK;
 
@@ -273,6 +275,7 @@ public class LookListFragment extends RecyclerViewFragment<LookData> {
 		startActivityForResult(intent, EDIT_LOOK);
 	}
 
+	@RequiresApi(api = Build.VERSION_CODES.Q)
 	@Override
 	public void onSettingsClick(LookData item, View view) {
 		PopupMenu popupMenu = new PopupMenu(getContext(), view);
@@ -308,6 +311,7 @@ public class LookListFragment extends RecyclerViewFragment<LookData> {
 		popupMenu.getMenu().findItem(R.id.new_scene).setVisible(false);
 		popupMenu.getMenu().findItem(R.id.show_details).setVisible(false);
 		popupMenu.getMenu().findItem(R.id.project_options).setVisible(false);
+		popupMenu.setForceShowIcon(true);
 		popupMenu.show();
 	}
 }

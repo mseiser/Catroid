@@ -23,11 +23,13 @@
 package org.catrobat.catroid.ui.recyclerview.fragment
 
 import android.content.Intent
+import android.os.Build
 import android.util.Log
 import android.view.Menu
 import android.view.View
 import android.widget.PopupMenu
 import androidx.annotation.PluralsRes
+import androidx.annotation.RequiresApi
 import org.catrobat.catroid.BuildConfig
 import org.catrobat.catroid.ProjectManager
 import org.catrobat.catroid.R
@@ -188,6 +190,7 @@ class SoundListFragment : RecyclerViewFragment<SoundInfo?>() {
         }
     }
 
+    @RequiresApi(Build.VERSION_CODES.Q)
     override fun onSettingsClick(item: SoundInfo?, view: View?) {
         val popupMenu = PopupMenu(context, view)
         val itemList: MutableList<SoundInfo?> = ArrayList()
@@ -209,6 +212,7 @@ class SoundListFragment : RecyclerViewFragment<SoundInfo?>() {
         popupMenu.menu.findItem(R.id.new_scene).isVisible = false
         popupMenu.menu.findItem(R.id.show_details).isVisible = false
         popupMenu.menu.findItem(R.id.project_options).isVisible = false
+        popupMenu.setForceShowIcon(true)
         popupMenu.show()
     }
 }
