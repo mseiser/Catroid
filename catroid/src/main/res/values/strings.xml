@@ -454,6 +454,7 @@
     <string name="keyword_label">Search</string>
     <string name="html_label">Insert HTML text</string>
     <string name="Image_format_not_supported">Image format not supported</string>
+    <string name="Image_resolution_exceeds_memory">Image format exceeds memory</string>
     <string name="import_conflicting_variables">The actor or object could not be added.</string>
     <string name="import_conflicting_variables_reason">The reason is that the following variable or
         list names are in conflict because they are used for
@@ -1423,6 +1424,8 @@ needs read and write access to it. You can always change permissions through you
     <string name="error_new_project">Something went wrong while creating a new project.</string>
     <string name="error_rename_scene">Something went wrong while renaming the scene.</string>
     <string name="error_load_project">Something went wrong while loading the project.</string>
+    <string name="error_upload_high_resolution_image">The image has a resolution that is too
+        large for the available memory. Please reduce the image size.</string>
     <string name="error_screenshot_failed">Something went wrong while saving the preview image.</string>
     <string name="error_internet_connection">An unknown error occurred. Check your Internet connection.</string>
     <string name="error_project_compatibility">The project is not compatible with this version of the app.</string>

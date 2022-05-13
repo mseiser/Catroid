@@ -66,6 +66,8 @@ import org.catrobat.catroid.ui.recyclerview.fragment.SceneListFragment
 import org.catrobat.catroid.ui.recyclerview.fragment.SpriteListFragment
 import org.catrobat.catroid.ui.recyclerview.util.UniqueNameProvider
 import org.catrobat.catroid.ui.settingsfragments.SettingsFragment
+import org.catrobat.catroid.utils.ImageEditing
+import org.catrobat.catroid.utils.ImageEditing.getImageDimensions
 import org.catrobat.catroid.utils.ToastUtil
 import org.catrobat.catroid.utils.Utils
 import org.catrobat.catroid.utils.setVisibleOrGone
@@ -277,7 +279,19 @@ class ProjectActivity : BaseCastActivity() {
     }
 
     private fun addSpriteFromUri(uri: Uri?, imageExtension: String = DEFAULT_IMAGE_EXTENSION) {
-        addSpriteObjectFromUri(uri, imageExtension, false)
+        val resolvedFileName = StorageOperations.resolveFileName(contentResolver, uri)
+       //TODO get dimensions from File -> cast to Bitmap?
+        val file  = File(resolvedFileName)
+
+        val freeSpace = file.freeSpace
+        val imageDimensions = getImageDimensions(file.absolutePath)
+        val resolutionSize : Int = imageDimensions[0] * imageDimensions[1] * 32 /8
+
+        if (resolutionSize >= freeSpace / 2) {
+            imageResolutionExceedsInternalMemory()
+        } else {
+            addSpriteObjectFromUri(uri, imageExtension, false)
+        }
     }
 
     fun addObjectFromUri(uri: Uri?) {
@@ -291,6 +305,7 @@ class ProjectActivity : BaseCastActivity() {
         val lookFileName: String
         val useDefaultSpriteName = resolvedFileName == null ||
             StorageOperations.getSanitizedFileName(resolvedFileName) == TMP_IMAGE_FILE_NAME
+
         if (useDefaultSpriteName) {
             resolvedName = getString(R.string.default_sprite_name)
             lookFileName = resolvedName + extension
@@ -464,5 +479,18 @@ class ProjectActivity : BaseCastActivity() {
             val dialog: DialogFragment = LegoSensorConfigInfoDialog.newInstance(Constants.EV3)
             dialog.show(supportFragmentManager, LegoSensorConfigInfoDialog.DIALOG_FRAGMENT_TAG)
         }
+    }
+
+    private fun imageResolutionExceedsInternalMemory() {
+        val alertDialogBuilder = applicationContext?.let {
+            AlertDialog.Builder(it)
+                .setTitle(getString(R.string.Image_resolution_exceeds_memory))
+                .setMessage(getString(R.string.error_upload_high_resolution_image))
+                .setPositiveButton(getString(R.string.ok)) { dialog: DialogInterface?, which: Int ->
+                    dialog?.cancel()
+                }
+        }
+        val alertDialog = alertDialogBuilder?.create()
+        alertDialog?.show()
     }
 }
