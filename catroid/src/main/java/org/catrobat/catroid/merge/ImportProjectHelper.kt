@@ -61,12 +61,12 @@ class ImportProjectHelper(
 
     fun getSpriteToAddName(): String? = spriteToAdd!!.name
 
-    fun addObjectDataToNewSprite(spriteToAddTo: Sprite?): Sprite {
-        copyFilesToSoundAndSpriteDir()
+    fun addObjectDataToNewSprite(spriteToAddTo: Sprite?): Sprite? {
+        var newSprite: Sprite? = null
         if (spriteToAddTo == null) {
-            newSprite.replaceSpriteWithSprite(spriteToAdd)
+            newSprite = Sprite(spriteToAdd, currentScene)
         } else {
-            spriteToAddTo.mergeSprites(spriteToAdd)
+            spriteToAddTo.mergeSprites(spriteToAdd, currentScene)
         }
 
         newProject?.let {
