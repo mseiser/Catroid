@@ -124,7 +124,7 @@ class SpriteListFragment : RecyclerViewFragment<Sprite?>() {
     override fun onResume() {
         initializeAdapter()
         super.onResume()
-        if (SelectLocalImportActivity.hasExtraTAG(activity) == false) {
+        if (activity !is SelectLocalImportActivity) {
             SnackbarUtil.showHintSnackbar(requireActivity(), R.string.hint_objects)
             val currentProject = projectManager.currentProject
             val title: String = if (!currentProject.hasMultipleScenes()) {
@@ -141,7 +141,7 @@ class SpriteListFragment : RecyclerViewFragment<Sprite?>() {
 
     override fun onAdapterReady() {
         super.onAdapterReady()
-        if (SelectLocalImportActivity.hasExtraTAG(activity) == false) {
+        if (activity !is SelectLocalImportActivity) {
             val callback: ItemTouchHelper.Callback = MultiViewTouchHelperCallback(adapter)
             touchHelper = ItemTouchHelper(callback)
             touchHelper.attachToRecyclerView(recyclerView)
@@ -288,14 +288,14 @@ class SpriteListFragment : RecyclerViewFragment<Sprite?>() {
         }
         val uri: Uri?
         when (requestCode) {
-            IMPORT_MEDIA_OBJECT -> {
+            Constants.REQUEST_MERGE_MEDIA_OBJECT -> {
                 uri = data?.data ?: return
-                addImportedSpriteOrObject(uri, Constants.REQUEST_MERGE_MEDIA_OBJECT, null)
+                addImportedSpriteOrObject(uri, requestCode, null)
             }
-            IMPORT_LOCAL_OBJECT -> {
+            Constants.REQUEST_MERGE_LOCAL_SPRITE -> {
                 val extras = data?.extras ?: return
                 uri = Uri.fromFile(extras.get(Constants.EXTRA_PROJECT_PATH) as File)
-                addImportedSpriteOrObject(uri, Constants.REQUEST_MERGE_LOCAL_SPRITE, extras)
+                addImportedSpriteOrObject(uri, requestCode, extras)
             }
         }
     }
@@ -316,7 +316,7 @@ class SpriteListFragment : RecyclerViewFragment<Sprite?>() {
         currentSprite = item
         val intent = Intent(requireContext(), WebViewActivity::class.java)
         intent.putExtra(WebViewActivity.INTENT_PARAMETER_URL, FlavoredConstants.LIBRARY_OBJECT_URL)
-        startActivityForResult(intent, IMPORT_MEDIA_OBJECT)
+        startActivityForResult(intent, Constants.REQUEST_MERGE_MEDIA_OBJECT)
     }
 
     private fun addFromLocalProject(item: Sprite?) {
@@ -325,7 +325,7 @@ class SpriteListFragment : RecyclerViewFragment<Sprite?>() {
         intent.putExtra(Constants.EXTRA_IMPORT_REQUEST_KEY, SelectLocalImportActivity.ImportType
             .SPRITE)
         intent.putExtra(Constants.EXTRA_FRAGMENT_TYPE_KEY, SelectLocalImportActivity.ImportType.PROJECT)
-        startActivityForResult(intent, IMPORT_LOCAL_OBJECT)
+        startActivityForResult(intent, Constants.REQUEST_MERGE_LOCAL_SPRITE)
     }
 
     override fun getRenameDialogTitle() = R.string.rename_sprite_dialog
@@ -405,8 +405,6 @@ class SpriteListFragment : RecyclerViewFragment<Sprite?>() {
 
     companion object {
         val TAG: String = SpriteListFragment::class.java.simpleName
-        const val IMPORT_MEDIA_OBJECT = 0
-        const val IMPORT_LOCAL_OBJECT = 1
     }
 
     override fun importItems(selectedItems: MutableList<Sprite?>?) {

@@ -74,7 +74,7 @@ class SceneListFragment : RecyclerViewFragment<Scene?>(),
 
     override fun onResume() {
         super.onResume()
-        if (SelectLocalImportActivity.hasExtraTAG(activity) == false) {
+        if (activity !is SelectLocalImportActivity) {
             val currentProject = projectManager.currentProject
             if (!currentProject.hasMultipleScenes()) {
                 projectManager.currentlyEditedScene = currentProject.defaultScene
@@ -218,24 +218,13 @@ class SceneListFragment : RecyclerViewFragment<Scene?>(),
     }
 
     private fun mergeSpritesToCurrentScene(importSprites: List<Sprite>, sourceProject: Project) {
-        val newSprites = ArrayList<Sprite>()
         importSprites.forEach { sprite ->
-            var merged = false
-            currentScene?.spriteList?.forEach { originalSprite ->
-                if (originalSprite.name.equals(sprite.name)) {
-                    originalSprite.mergeSprites(sprite, currentScene)
-                    merged = true
-                }
-            }
-            if (merged.not()) {
-                newSprites.add(sprite)
-            }
-        }
-
-        if (newSprites.isNotEmpty()) {
-            newSprites.forEach { sprite ->
-                val importSprite = Sprite(sprite, currentScene)
-                currentScene?.addSprite(importSprite)
+            val original = currentScene?.getSprite(sprite.name)
+            if (original != null) {
+                original.mergeSprites(sprite, currentScene)
+            } else {
+                val newSprite = Sprite(sprite, currentScene)
+                currentScene?.addSprite(newSprite)
             }
         }
         ImportVariablesManager.importProjectVariables(sourceProject)

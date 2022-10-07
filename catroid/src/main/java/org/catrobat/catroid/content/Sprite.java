@@ -731,7 +731,7 @@ public class Sprite implements Nameable, Serializable {
 		this.userVariables.addAll(sprite.userVariables);
 		this.userLists.addAll(sprite.userLists);
 		this.userDefinedBrickList.addAll(sprite.userDefinedBrickList);
-		this.look = sprite.look;
+		sprite.look.copyTo(this.look);
 		this.myOriginal = sprite;
 		this.name = sprite.getName();
 	}
@@ -779,8 +779,12 @@ public class Sprite implements Nameable, Serializable {
 	public void mergeSprites(Sprite sprite, Scene destinationScene) throws IOException {
 		this.scriptList.addAll(sprite.scriptList);
 		this.nfcTagList.addAll(sprite.nfcTagList);
-		copyLooksAndSounds(sprite, destinationScene, true);
-
+		try {
+			copyLooksAndSounds(sprite, destinationScene, true);
+		} catch (IOException e) {
+			Log.e(TAG, Log.getStackTraceString(e));
+			throw e;
+		}
 		for (UserVariable userVariable: sprite.userVariables) {
 			if (!this.userVariables.contains(userVariable)) {
 				this.userVariables.add(userVariable);

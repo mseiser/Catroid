@@ -163,28 +163,6 @@ class UiTestUtils private constructor() {
         }
 
         @JvmStatic
-        fun uncheckPlaceVisually(activity: Activity) {
-            getInstrumentation().waitForIdleSync()
-
-            val switchCompat = onView(
-                allOf(
-                    withId(R.id.place_visually_sprite_switch), withText("Place visually"),
-                    childAtPosition(
-                        childAtPosition(
-                            ViewMatchers.withClassName(Matchers.`is`("android.widget.ScrollView")),
-                            0
-                        ),
-                        1
-                    )
-                )
-            )
-
-            if (activity.window.currentFocus?.findViewById<SwitchCompat>(R.id.place_visually_sprite_switch)?.isChecked == true) {
-                switchCompat.perform(ViewActions.scrollTo(), click())
-            }
-        }
-
-        @JvmStatic
         fun getDefaultTestProject(context: Context): Project {
             val baseProject =
                 DefaultProjectHandler.createAndSaveDefaultProject("base", context, false)

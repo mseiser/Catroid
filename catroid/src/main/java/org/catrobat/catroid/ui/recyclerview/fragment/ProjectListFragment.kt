@@ -429,10 +429,10 @@ class ProjectListFragment : RecyclerViewFragment<ProjectData?>(), ProjectLoadLis
             ProjectLoader(directoryFile, requireContext()).setListener(this).loadProjectAsync()
         }
         if (actionModeType == IMPORT_LOCAL) {
+            val activity = activity as SelectLocalImportActivity
             SelectLocalImportActivity.sourceProject =
                 XstreamSerializer.getInstance().loadProject(item!!.directory.absoluteFile, context)
-            (activity as SelectLocalImportActivity)
-                .loadNext(SelectLocalImportActivity.ImportType.PROJECT)
+            activity.loadNext(SelectLocalImportActivity.ImportType.PROJECT)
         }
     }
 

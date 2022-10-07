@@ -95,7 +95,11 @@ class SpriteFromLocalIntentTest {
 
         expectedIntent = AllOf.allOf(
             IntentMatchers.hasExtra(
-                SelectLocalImportActivity.TAG,
+                Constants.EXTRA_IMPORT_REQUEST_KEY,
+                SelectLocalImportActivity.ImportType.SPRITE
+            ),
+            IntentMatchers.hasExtra(
+                Constants.EXTRA_FRAGMENT_TYPE_KEY,
                 SelectLocalImportActivity.ImportType.PROJECT
             )
         )
@@ -152,7 +156,7 @@ class SpriteFromLocalIntentTest {
 
     @Category(AppUi::class, Smoke::class)
     @Test
-    fun testImportSpriteFromLocalIntentTest() {
+    fun testImportSpriteFromLocalIntent() {
         Espresso.onView(ViewMatchers.withId(R.id.button_add))
             .perform(ViewActions.click())
         Espresso.onView(ViewMatchers.withId(R.id.dialog_import_sprite_from_local))

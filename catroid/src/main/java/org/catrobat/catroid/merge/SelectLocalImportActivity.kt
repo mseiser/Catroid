@@ -110,34 +110,33 @@ class SelectLocalImportActivity : BaseActivity() {
     }
 
     fun loadNext(type: ImportType) {
-        return when (type) {
+        when (type) {
             ImportType.PROJECT ->
                 if (sourceProject?.hasMultipleScenes() == true) {
                     loadSelector(ImportType.SCENE)
                 } else {
                     sourceScene = sourceProject?.defaultScene
-                    if (requested == ImportType.SPRITE) {
-                        loadSelector(ImportType.SPRITE)
-                    } else {
-                        sourceSprites = sourceScene?.spriteList?.map { it.name } as ArrayList<String>
-                        finish()
+                    when (requested) {
+                        ImportType.SCENE -> finish()
+                        ImportType.SPRITE -> loadSelector(ImportType.SPRITE)
+                        else -> throw IllegalStateException(TAG + R.string.reject_import)
                     }
                 }
             ImportType.SCENE ->
-                if (requested == ImportType.SPRITE) {
-                    loadSelector(ImportType.SPRITE)
-                } else {
-                    sourceSprites = sourceScene?.spriteList?.map { it.name } as ArrayList<String>
-                    finish()
+                when (requested) {
+                    ImportType.SCENE -> finish()
+                    ImportType.SPRITE -> loadSelector(ImportType.SPRITE)
+                    else -> throw IllegalStateException(TAG + R.string.reject_import)
                 }
-            else -> throw java.lang.IllegalStateException(TAG + "Other Types can't navigate to " +
-                     "next Fragments"
-            )
         }
     }
 
     override fun finish() {
         val intent = Intent()
+        if (requested == ImportType.SCENE) {
+            sourceSprites = sourceScene?.spriteList?.map { it.name } as ArrayList<String>
+        }
+
         if (sourceProject != null && sourceScene != null && sourceSprites != null) {
             intent.putExtra(Constants.EXTRA_PROJECT_PATH, sourceProject?.directory?.absoluteFile)
             intent.putExtra(Constants.EXTRA_SCENE_NAME, sourceScene?.name)
@@ -154,6 +153,5 @@ class SelectLocalImportActivity : BaseActivity() {
         var sourceScene: Scene? = null
         var sourceSprites: ArrayList<String>? = null
         val TAG: String = SelectLocalImportActivity::class.java.simpleName
-        fun hasExtraTAG(activity: FragmentActivity?) = activity?.intent?.hasExtra(TAG)
     }
 }
