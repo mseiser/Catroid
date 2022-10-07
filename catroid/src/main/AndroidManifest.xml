@@ -231,7 +231,7 @@
             android:name=".ui.filepicker.FilePickerActivity" />
 
         <activity
-              android:name=".merge.ImportLocalObjectActivity"
+              android:name=".merge.SelectLocalImportActivity"
               android:screenOrientation="portrait" />
 
         <service android:name=".transfers.project.ProjectUploadService" />

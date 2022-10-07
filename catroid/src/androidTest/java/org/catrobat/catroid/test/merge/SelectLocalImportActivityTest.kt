@@ -33,7 +33,7 @@ import androidx.test.espresso.matcher.ViewMatchers.withId
 import org.catrobat.catroid.ProjectManager
 import org.catrobat.catroid.R
 import org.catrobat.catroid.content.Project
-import org.catrobat.catroid.merge.ImportLocalObjectActivity
+import org.catrobat.catroid.merge.SelectLocalImportActivity
 import org.catrobat.catroid.test.utils.TestUtils
 import org.catrobat.catroid.uiespresso.util.UiTestUtils
 import org.catrobat.catroid.uiespresso.util.rules.BaseActivityTestRule
@@ -43,7 +43,7 @@ import org.junit.Rule
 import org.junit.Test
 import org.koin.java.KoinJavaComponent.inject
 
-class ImportLocalObjectActivityTest {
+class SelectLocalImportActivityTest {
     private lateinit var baseProject: Project
     private lateinit var testProject: Project
 
@@ -51,7 +51,7 @@ class ImportLocalObjectActivityTest {
 
     @get:Rule
     var baseActivityTestRule = BaseActivityTestRule(
-        ImportLocalObjectActivity::class.java, true, false
+        SelectLocalImportActivity::class.java, true, false
     )
 
     @Before
@@ -71,9 +71,9 @@ class ImportLocalObjectActivityTest {
 
     @Test
     fun testImportSpriteView() {
-        ImportLocalObjectActivity.projectToImportFrom = testProject
-        ImportLocalObjectActivity.sceneToImportFrom = testProject.defaultScene
-        setUpActivity(ImportLocalObjectActivity.REQUEST_SPRITE)
+        SelectLocalImportActivity.sourceProject = testProject
+        SelectLocalImportActivity.sourceScene = testProject.defaultScene
+        setUpActivity(SelectLocalImportActivity.ImportType.SPRITE)
 
         Espresso.onView(ViewMatchers.withText(R.string.import_object))
             .check(ViewAssertions.matches(isDisplayed()))
@@ -94,8 +94,8 @@ class ImportLocalObjectActivityTest {
 
     @Test
     fun testImportFromSceneView() {
-        ImportLocalObjectActivity.projectToImportFrom = testProject
-        setUpActivity(ImportLocalObjectActivity.REQUEST_SCENE)
+        SelectLocalImportActivity.sourceProject = testProject
+        setUpActivity(SelectLocalImportActivity.ImportType.SCENE)
 
         Espresso.onView(ViewMatchers.withText(R.string.import_from_scene))
             .check(ViewAssertions.matches(isDisplayed()))
@@ -113,7 +113,7 @@ class ImportLocalObjectActivityTest {
 
     @Test
     fun testImportFromProjectView() {
-        setUpActivity(ImportLocalObjectActivity.REQUEST_PROJECT)
+        setUpActivity(SelectLocalImportActivity.ImportType.PROJECT)
 
         Espresso.onView(ViewMatchers.withText(R.string.import_from_project))
             .check(ViewAssertions.matches(isDisplayed()))
@@ -133,8 +133,8 @@ class ImportLocalObjectActivityTest {
 
     @Test
     fun navigateBackFromScene() {
-        ImportLocalObjectActivity.projectToImportFrom = baseProject
-        setUpActivity(ImportLocalObjectActivity.REQUEST_SCENE)
+        SelectLocalImportActivity.sourceProject = baseProject
+        setUpActivity(SelectLocalImportActivity.ImportType.SCENE)
         Espresso.onView(ViewMatchers.withText(R.string.import_from_scene))
             .check(ViewAssertions.matches(isDisplayed()))
         Espresso.pressBack()
@@ -144,9 +144,9 @@ class ImportLocalObjectActivityTest {
 
     @Test
     fun navigateBackFromSpriteToSingleSceneProject() {
-        ImportLocalObjectActivity.projectToImportFrom = baseProject
-        ImportLocalObjectActivity.sceneToImportFrom = testProject.defaultScene
-        setUpActivity(ImportLocalObjectActivity.REQUEST_SPRITE)
+        SelectLocalImportActivity.sourceProject = baseProject
+        SelectLocalImportActivity.sourceScene = testProject.defaultScene
+        setUpActivity(SelectLocalImportActivity.ImportType.SPRITE)
         Espresso.onView(ViewMatchers.withText(R.string.import_object))
             .check(ViewAssertions.matches(isDisplayed()))
         Espresso.pressBack()
@@ -156,9 +156,9 @@ class ImportLocalObjectActivityTest {
 
     @Test
     fun navigateBackFromSpriteToSelectScene() {
-        ImportLocalObjectActivity.projectToImportFrom = testProject
-        ImportLocalObjectActivity.sceneToImportFrom = testProject.defaultScene
-        setUpActivity(ImportLocalObjectActivity.REQUEST_SPRITE)
+        SelectLocalImportActivity.sourceProject = testProject
+        SelectLocalImportActivity.sourceScene = testProject.defaultScene
+        setUpActivity(SelectLocalImportActivity.ImportType.SPRITE)
         Espresso.onView(ViewMatchers.withText(R.string.import_object))
             .check(ViewAssertions.matches(isDisplayed()))
         Espresso.pressBack()
@@ -166,9 +166,9 @@ class ImportLocalObjectActivityTest {
             .check(ViewAssertions.matches(isDisplayed()))
     }
 
-    private fun setUpActivity(request: String) {
+    private fun setUpActivity(request: SelectLocalImportActivity.ImportType) {
         val intent = Intent()
-        intent.putExtra(ImportLocalObjectActivity.TAG, request)
+        intent.putExtra(SelectLocalImportActivity.TAG, request)
         baseActivityTestRule.launchActivity(intent)
     }
 }

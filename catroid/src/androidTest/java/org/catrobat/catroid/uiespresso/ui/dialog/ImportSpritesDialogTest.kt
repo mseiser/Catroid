@@ -44,7 +44,7 @@ import org.catrobat.catroid.common.FlavoredConstants
 import org.catrobat.catroid.content.Project
 import org.catrobat.catroid.io.StorageOperations
 import org.catrobat.catroid.io.XstreamSerializer
-import org.catrobat.catroid.merge.ImportLocalObjectActivity
+import org.catrobat.catroid.merge.SelectLocalImportActivity
 import org.catrobat.catroid.test.merge.MergeTestUtils
 import org.catrobat.catroid.ui.ProjectActivity
 import org.catrobat.catroid.uiespresso.util.rules.FragmentActivityTestRule
@@ -90,8 +90,8 @@ class ImportSpritesDialogTest {
         Intents.init()
         expectedIntent = AllOf.allOf(
             IntentMatchers.hasExtra(
-                ImportLocalObjectActivity.TAG,
-                ImportLocalObjectActivity.REQUEST_PROJECT
+                SelectLocalImportActivity.TAG,
+                SelectLocalImportActivity.ImportType.PROJECT
             )
         )
 
@@ -106,11 +106,11 @@ class ImportSpritesDialogTest {
         importSpriteCount = importSprites.size
         val resultData = Intent()
         resultData.putExtra(
-            ImportLocalObjectActivity.REQUEST_PROJECT, localProject.directory
+            Constants.EXTRA_PROJECT_PATH, localProject.directory
                 .absoluteFile
         )
-        resultData.putExtra(ImportLocalObjectActivity.REQUEST_SCENE, localProject.defaultScene.name)
-        resultData.putExtra(ImportLocalObjectActivity.REQUEST_SPRITE, importSprites)
+        resultData.putExtra(Constants.EXTRA_SCENE_NAMES, localProject.defaultScene.name)
+        resultData.putExtra(Constants.EXTRA_SPRITE_NAMES, importSprites)
 
         val result = Instrumentation.ActivityResult(Activity.RESULT_OK, resultData)
         Intents.intending(expectedIntent).respondWith(result)

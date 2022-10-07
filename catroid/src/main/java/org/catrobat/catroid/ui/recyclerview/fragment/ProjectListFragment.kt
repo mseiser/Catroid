@@ -54,10 +54,9 @@ import org.catrobat.catroid.io.asynctask.ProjectLoader
 import org.catrobat.catroid.io.asynctask.ProjectLoader.ProjectLoadListener
 import org.catrobat.catroid.io.asynctask.ProjectRenamer
 import org.catrobat.catroid.io.asynctask.ProjectUnZipperAndImporter
-import org.catrobat.catroid.merge.ImportLocalObjectActivity
+import org.catrobat.catroid.merge.SelectLocalImportActivity
 import org.catrobat.catroid.ui.BottomBar
 import org.catrobat.catroid.ui.ProjectActivity
-import org.catrobat.catroid.ui.ProjectListActivity
 import org.catrobat.catroid.ui.UiUtils
 import org.catrobat.catroid.ui.filepicker.FilePickerActivity
 import org.catrobat.catroid.ui.fragment.ProjectOptionsFragment
@@ -85,14 +84,14 @@ class ProjectListFragment : RecyclerViewFragment<ProjectData?>(), ProjectLoadLis
             importProject(requireArguments().getParcelable("intent"))
         }
 
-        if (ImportLocalObjectActivity.hasExtraTAG(activity) == true) {
+        if (activity is SelectLocalImportActivity) {
             actionModeType = IMPORT_LOCAL
             setHasOptionsMenu(false)
             adapter.showSettings = false
             activity?.setTitle(R.string.import_from_project)
-            ImportLocalObjectActivity.projectToImportFrom = null
-            ImportLocalObjectActivity.sceneToImportFrom = null
-            ImportLocalObjectActivity.spritesToImport = null
+            SelectLocalImportActivity.sourceProject = null
+            SelectLocalImportActivity.sourceScene = null
+            SelectLocalImportActivity.sourceSprites = null
         }
     }
 
@@ -131,7 +130,7 @@ class ProjectListFragment : RecyclerViewFragment<ProjectData?>(), ProjectLoadLis
     }
 
     override fun onResume() {
-        if (ImportLocalObjectActivity.hasExtraTAG(activity) == false) {
+        if (activity !is SelectLocalImportActivity) {
             projectManager.currentProject = null
             BottomBar.showBottomBar(requireActivity())
         }
@@ -430,12 +429,10 @@ class ProjectListFragment : RecyclerViewFragment<ProjectData?>(), ProjectLoadLis
             ProjectLoader(directoryFile, requireContext()).setListener(this).loadProjectAsync()
         }
         if (actionModeType == IMPORT_LOCAL) {
-            try {
-                ImportLocalObjectActivity.projectToImportFrom = XstreamSerializer.getInstance().loadProject(item!!.directory.absoluteFile, context)
-                (activity as ImportLocalObjectActivity).loadNext(ImportLocalObjectActivity.REQUEST_PROJECT)
-            } catch (e: IOException) {
-                Log.e(TAG, Log.getStackTraceString(e))
-            }
+            SelectLocalImportActivity.sourceProject =
+                XstreamSerializer.getInstance().loadProject(item!!.directory.absoluteFile, context)
+            (activity as SelectLocalImportActivity)
+                .loadNext(SelectLocalImportActivity.ImportType.PROJECT)
         }
     }
 

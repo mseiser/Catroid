@@ -36,16 +36,11 @@ import org.catrobat.catroid.common.Constants
 import org.catrobat.catroid.common.FlavoredConstants
 import org.catrobat.catroid.content.Project
 import org.catrobat.catroid.content.Scene
-import org.catrobat.catroid.content.Sprite
 import org.catrobat.catroid.io.StorageOperations
 import org.catrobat.catroid.io.XstreamSerializer
 import org.catrobat.catroid.io.ZipArchiver
-import org.catrobat.catroid.ui.ProjectActivity.Companion.SPRITE_FROM_LOCAL
-import org.catrobat.catroid.ui.ProjectActivity.Companion.SPRITE_OBJECT
 import org.catrobat.catroid.ui.recyclerview.dialog.RejectImportDialogFragment
 import org.catrobat.catroid.ui.recyclerview.dialog.RejectImportDialogFragment.Companion.CONFLICT_PROJECT_NAME
-import org.catrobat.catroid.ui.recyclerview.fragment.SpriteListFragment.Companion.IMPORT_LOCAL_OBJECT
-import org.catrobat.catroid.ui.recyclerview.fragment.SpriteListFragment.Companion.IMPORT_MEDIA_OBJECT
 import org.catrobat.catroid.ui.recyclerview.util.UniqueNameProvider
 import org.catrobat.catroid.utils.ToastUtil
 import org.koin.java.KoinJavaComponent.inject
@@ -64,28 +59,28 @@ class ImportUtils(val context: Context) {
     fun processImportData(uri: Uri, requestCode: Int, importData: Bundle?):
         List<ImportSpriteData>? {
         val resolvedFileName = StorageOperations.resolveFileName(context.contentResolver, uri)
-        if (resolvedFileName.contains('.')) {
+        val useDefaultSpriteName = resolvedFileName == null || StorageOperations
+            .getSanitizedFileName(resolvedFileName) == Constants.TMP_IMAGE_FILE_NAME
+        val (resolvedName, lookFileName) = createFileNames(useDefaultSpriteName, resolvedFileName)
+        val sourceProject = getProject(resolvedName, lookFileName)
+        if (sourceProject == null) {
             RejectImportDialogFragment(null, CONFLICT_PROJECT_NAME).show(
                 (context as FragmentActivity).supportFragmentManager,
                 RejectImportDialogFragment.TAG
             )
             return null
         }
-        val useDefaultSpriteName = resolvedFileName == null || StorageOperations
-            .getSanitizedFileName(resolvedFileName) == Constants.TMP_IMAGE_FILE_NAME
-        val (resolvedName, lookFileName) = createFileNames(useDefaultSpriteName, resolvedFileName)
-        val sourceProject = getProject(resolvedName, lookFileName) ?: return null
 
         return when (requestCode) {
-            SPRITE_FROM_LOCAL -> processLocalImport(importData, lookFileName, sourceProject, true)
-            IMPORT_LOCAL_OBJECT -> processLocalImport(
-                importData,
-                lookFileName,
-                sourceProject,
-                false
-            )
-            SPRITE_OBJECT -> processMediaImport(lookFileName, sourceProject, true)
-            IMPORT_MEDIA_OBJECT -> processMediaImport(lookFileName, sourceProject, false)
+            Constants.REQUEST_IMPORT_LOCAL_SCENE,
+            Constants.REQUEST_IMPORT_LOCAL_SPRITE ->
+                processLocalImport(importData, lookFileName, sourceProject, true)
+            Constants.REQUEST_MERGE_LOCAL_SPRITE ->
+                processLocalImport(importData, lookFileName, sourceProject, false)
+            Constants.REQUEST_IMPORT_MEDIA_OBJECT ->
+                processMediaImport(lookFileName, sourceProject, true)
+            Constants.REQUEST_MERGE_MEDIA_OBJECT ->
+                processMediaImport(lookFileName, sourceProject, false)
             else -> null
         }
     }
@@ -132,14 +127,8 @@ class ImportUtils(val context: Context) {
         sourceProject: Project,
         isObject: Boolean
     ): ArrayList<ImportSpriteData>? {
-        val sceneName = importData?.getString(
-            ImportLocalObjectActivity
-                .REQUEST_SCENE
-        ) ?: return null
-        val spriteNames = importData.getStringArrayList(
-            ImportLocalObjectActivity
-                .REQUEST_SPRITE
-        ) ?: return null
+        val sceneName = importData?.getString(Constants.EXTRA_SCENE_NAME) ?: return null
+        val spriteNames = importData.getStringArrayList(Constants.EXTRA_SPRITE_NAMES) ?: return null
 
         val importSpritesData: ArrayList<ImportSpriteData> =
             createNewSpritesData(
@@ -240,29 +229,5 @@ class ImportUtils(val context: Context) {
             )
         }
         return data
-    }
-
-    fun copyFilesToSoundAndSpriteDir(sprite: Sprite) {
-        val imageDirectory = File(
-            currentScene.directory,
-            Constants.IMAGE_DIRECTORY_NAME
-        )
-        val soundsDirectory = File(
-            currentScene.directory,
-            Constants.SOUND_DIRECTORY_NAME
-        )
-
-        sprite.lookList?.forEach { currentListObject ->
-            StorageOperations.copyFileToDir(
-                currentListObject.file,
-                imageDirectory
-            )
-        }
-        sprite.soundList?.forEach { currentListObject ->
-            StorageOperations.copyFileToDir(
-                currentListObject.file,
-                soundsDirectory
-            )
-        }
     }
 }

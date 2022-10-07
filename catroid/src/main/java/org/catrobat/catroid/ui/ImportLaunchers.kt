@@ -27,6 +27,7 @@ import android.Manifest.permission.CAMERA
 import android.app.Activity
 import android.content.ActivityNotFoundException
 import android.content.ComponentName
+import android.content.Context
 import android.content.Intent
 import android.graphics.Bitmap
 import android.net.Uri
@@ -36,8 +37,10 @@ import android.provider.MediaStore.ACTION_IMAGE_CAPTURE
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.FileProvider
+import androidx.fragment.app.FragmentActivity
 import org.catrobat.catroid.ProjectManager
 import org.catrobat.catroid.R
+import org.catrobat.catroid.common.Constants
 import org.catrobat.catroid.common.Constants.CAMERA_CACHE_DIRECTORY
 import org.catrobat.catroid.common.Constants.DEFAULT_IMAGE_EXTENSION
 import org.catrobat.catroid.common.Constants.EXTRA_PICTURE_PATH_POCKET_PAINT
@@ -45,7 +48,7 @@ import org.catrobat.catroid.common.Constants.POCKET_PAINT_CACHE_DIRECTORY
 import org.catrobat.catroid.common.Constants.POCKET_PAINT_INTENT_ACTIVITY_NAME
 import org.catrobat.catroid.common.Constants.TMP_IMAGE_FILE_NAME
 import org.catrobat.catroid.io.StorageOperations
-import org.catrobat.catroid.merge.ImportLocalObjectActivity
+import org.catrobat.catroid.merge.SelectLocalImportActivity
 import org.catrobat.catroid.ui.WebViewActivity.INTENT_PARAMETER_URL
 import org.catrobat.catroid.ui.runtimepermissions.RequiresPermissionTask
 import java.io.File
@@ -168,12 +171,13 @@ class ImportFromCameraLauncher(private val activity: AppCompatActivity) : Import
 
 class ImportFromLocalLauncher(
     val activity: AppCompatActivity,
-    val type: String
-) : ImportLauncher {
+    val request: SelectLocalImportActivity.ImportType
+    ) : ImportLauncher {
 
     override fun startActivityForResult(requestCode: Int) {
-        val intent = Intent(activity, ImportLocalObjectActivity::class.java)
-        intent.putExtra(ImportLocalObjectActivity.TAG, type)
+        val intent = Intent(activity, SelectLocalImportActivity::class.java)
+        intent.putExtra(Constants.EXTRA_IMPORT_REQUEST_KEY, request)
+        intent.putExtra(Constants.EXTRA_FRAGMENT_TYPE_KEY, SelectLocalImportActivity.ImportType.PROJECT)
         activity.startActivityForResult(intent, requestCode)
     }
 }

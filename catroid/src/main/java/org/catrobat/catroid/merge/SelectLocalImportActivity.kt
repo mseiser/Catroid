@@ -27,6 +27,7 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.FragmentActivity
 import org.catrobat.catroid.R
+import org.catrobat.catroid.common.Constants
 import org.catrobat.catroid.content.Project
 import org.catrobat.catroid.content.Scene
 import org.catrobat.catroid.databinding.ActivityRecyclerBinding
@@ -37,10 +38,21 @@ import org.catrobat.catroid.ui.recyclerview.fragment.RecyclerViewFragment
 import org.catrobat.catroid.ui.recyclerview.fragment.SceneListFragment
 import org.catrobat.catroid.ui.recyclerview.fragment.SpriteListFragment
 
-class ImportLocalObjectActivity : BaseActivity() {
+class SelectLocalImportActivity : BaseActivity() {
     private lateinit var binding: ActivityRecyclerBinding
     private lateinit var listFragment: RecyclerViewFragment<*>
-    private var type: String? = null
+    val requested: ImportType
+        get() {
+           return intent.getSerializableExtra(Constants.EXTRA_IMPORT_REQUEST_KEY) as ImportType
+        }
+    val currentFragmentType: ImportType
+        get() {
+            return intent.getSerializableExtra(Constants.EXTRA_FRAGMENT_TYPE_KEY) as ImportType
+        }
+
+    enum class ImportType {
+        PROJECT, SCENE, SPRITE
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -52,29 +64,20 @@ class ImportLocalObjectActivity : BaseActivity() {
         setSupportActionBar(binding.toolbar.toolbar)
         BottomBar.hideBottomBar(this)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
-        setTypeFromIntent()
-        loadSelector(type)
-    }
-
-    private fun setTypeFromIntent() {
-        if (intent.hasExtra(TAG) && type == null) {
-            type = intent.extras?.getString(TAG)!!
-        }
+        loadSelector(currentFragmentType)
     }
 
     override fun onResume() {
         super.onResume()
         BottomBar.hideBottomBar(this)
-        setTypeFromIntent()
-        loadSelector(type)
+        loadSelector(currentFragmentType)
     }
 
-    fun loadSelector(type: String?) {
-        this.type = type
+    fun loadSelector(type: ImportType?) {
         listFragment = when (type) {
-            REQUEST_PROJECT -> ProjectListFragment()
-            REQUEST_SCENE -> SceneListFragment()
-            REQUEST_SPRITE -> SpriteListFragment()
+            ImportType.PROJECT -> ProjectListFragment()
+            ImportType.SCENE -> SceneListFragment()
+            ImportType.SPRITE -> SpriteListFragment()
             else -> throw IllegalStateException(TAG + R.string.reject_import)
         }
         loadFragment(listFragment.javaClass.simpleName)
@@ -94,45 +97,51 @@ class ImportLocalObjectActivity : BaseActivity() {
     }
 
     override fun onBackPressed() {
-        when (type) {
-            REQUEST_SPRITE ->
-                if (projectToImportFrom?.hasMultipleScenes() == true) {
-                    loadSelector(REQUEST_SCENE)
+        when (currentFragmentType) {
+            ImportType.SPRITE ->
+                if (sourceProject?.hasMultipleScenes() == true) {
+                    loadSelector(ImportType.SCENE)
                 } else {
-                    loadSelector(REQUEST_PROJECT)
+                    loadSelector(ImportType.PROJECT)
                 }
-            REQUEST_SCENE -> loadSelector(REQUEST_PROJECT)
-            REQUEST_PROJECT -> finish()
-            else -> throw java.lang.IllegalStateException(
-                TAG + "Access press Back in illegal " +
-                    "state"
-            )
+            ImportType.SCENE -> loadSelector(ImportType.PROJECT)
+            ImportType.PROJECT -> finish()
         }
     }
 
-    fun loadNext(type: String) {
+    fun loadNext(type: ImportType) {
         return when (type) {
-            REQUEST_PROJECT ->
-                if (projectToImportFrom?.hasMultipleScenes() == true) {
-                    loadSelector(REQUEST_SCENE)
+            ImportType.PROJECT ->
+                if (sourceProject?.hasMultipleScenes() == true) {
+                    loadSelector(ImportType.SCENE)
                 } else {
-                    sceneToImportFrom = projectToImportFrom?.defaultScene
-                    loadSelector(REQUEST_SPRITE)
+                    sourceScene = sourceProject?.defaultScene
+                    if (requested == ImportType.SPRITE) {
+                        loadSelector(ImportType.SPRITE)
+                    } else {
+                        sourceSprites = sourceScene?.spriteList?.map { it.name } as ArrayList<String>
+                        finish()
+                    }
                 }
-            REQUEST_SCENE -> loadSelector(REQUEST_SPRITE)
-            else -> throw java.lang.IllegalStateException(
-                TAG + "Other Types can't navigate to " +
-                    "next Fragments"
+            ImportType.SCENE ->
+                if (requested == ImportType.SPRITE) {
+                    loadSelector(ImportType.SPRITE)
+                } else {
+                    sourceSprites = sourceScene?.spriteList?.map { it.name } as ArrayList<String>
+                    finish()
+                }
+            else -> throw java.lang.IllegalStateException(TAG + "Other Types can't navigate to " +
+                     "next Fragments"
             )
         }
     }
 
     override fun finish() {
         val intent = Intent()
-        if (projectToImportFrom != null && sceneToImportFrom != null && spritesToImport != null) {
-            intent.putExtra(REQUEST_PROJECT, projectToImportFrom?.directory?.absoluteFile)
-            intent.putExtra(REQUEST_SCENE, sceneToImportFrom?.name)
-            intent.putExtra(REQUEST_SPRITE, spritesToImport)
+        if (sourceProject != null && sourceScene != null && sourceSprites != null) {
+            intent.putExtra(Constants.EXTRA_PROJECT_PATH, sourceProject?.directory?.absoluteFile)
+            intent.putExtra(Constants.EXTRA_SCENE_NAME, sourceScene?.name)
+            intent.putExtra(Constants.EXTRA_SPRITE_NAMES, sourceSprites)
             setResult(RESULT_OK, intent)
         } else {
             setResult(RESULT_CANCELED)
@@ -141,16 +150,10 @@ class ImportLocalObjectActivity : BaseActivity() {
     }
 
     companion object {
-        var projectToImportFrom: Project? = null
-        var sceneToImportFrom: Scene? = null
-        var spritesToImport: ArrayList<String>? = null
-        var backPressedInActionMode: Boolean = false
-
-        val REQUEST_PROJECT = ProjectListFragment.TAG
-        val REQUEST_SCENE = SceneListFragment.TAG
-        val REQUEST_SPRITE = SpriteListFragment.TAG
-        val TAG: String = ImportLocalObjectActivity::class.java.simpleName
-
+        var sourceProject: Project? = null
+        var sourceScene: Scene? = null
+        var sourceSprites: ArrayList<String>? = null
+        val TAG: String = SelectLocalImportActivity::class.java.simpleName
         fun hasExtraTAG(activity: FragmentActivity?) = activity?.intent?.hasExtra(TAG)
     }
 }

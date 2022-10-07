@@ -43,7 +43,7 @@ import org.catrobat.catroid.content.Project
 import org.catrobat.catroid.content.Sprite
 import org.catrobat.catroid.io.StorageOperations
 import org.catrobat.catroid.io.XstreamSerializer
-import org.catrobat.catroid.merge.ImportLocalObjectActivity
+import org.catrobat.catroid.merge.SelectLocalImportActivity
 import org.catrobat.catroid.test.merge.MergeTestUtils
 import org.catrobat.catroid.testsuites.annotations.Cat.AppUi
 import org.catrobat.catroid.testsuites.annotations.Level.Smoke
@@ -93,8 +93,8 @@ class SpriteFromLocalIntentDismissTest {
 
         expectedIntent = AllOf.allOf(
             IntentMatchers.hasExtra(
-                ImportLocalObjectActivity.TAG,
-                ImportLocalObjectActivity.REQUEST_PROJECT
+                Constants.EXTRA_IMPORT_REQUEST_KEY,
+                SelectLocalImportActivity.ImportType.SPRITE
             )
         )
 

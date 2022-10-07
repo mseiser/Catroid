@@ -45,7 +45,7 @@ import org.catrobat.catroid.content.Project
 import org.catrobat.catroid.formulaeditor.UserVariable
 import org.catrobat.catroid.io.StorageOperations
 import org.catrobat.catroid.io.XstreamSerializer
-import org.catrobat.catroid.merge.ImportLocalObjectActivity
+import org.catrobat.catroid.merge.SelectLocalImportActivity
 import org.catrobat.catroid.test.merge.MergeTestUtils
 import org.catrobat.catroid.ui.ProjectActivity
 import org.catrobat.catroid.uiespresso.util.rules.FragmentActivityTestRule
@@ -94,8 +94,8 @@ class RejectImportDialogTest {
         Intents.init()
         expectedIntent = AllOf.allOf(
             IntentMatchers.hasExtra(
-                ImportLocalObjectActivity.TAG,
-                ImportLocalObjectActivity.REQUEST_PROJECT
+                SelectLocalImportActivity.TAG,
+                SelectLocalImportActivity.ImportType.PROJECT
             )
         )
 
@@ -113,25 +113,25 @@ class RejectImportDialogTest {
         importSpriteCount = importSprites.size
         val resultData1 = Intent()
         resultData1.putExtra(
-            ImportLocalObjectActivity.REQUEST_PROJECT, projectWithVariableConflicts.directory
+            Constants.EXTRA_PROJECT_PATH, projectWithVariableConflicts.directory
                 .absoluteFile
         )
         resultData1.putExtra(
-            ImportLocalObjectActivity.REQUEST_SCENE,
+            Constants.EXTRA_SCENE_NAMES,
             projectWithVariableConflicts.defaultScene.name
         )
-        resultData1.putExtra(ImportLocalObjectActivity.REQUEST_SPRITE, importSprites)
+        resultData1.putExtra(Constants.EXTRA_SPRITE_NAMES, importSprites)
 
         val resultData2 = Intent()
         resultData2.putExtra(
-            ImportLocalObjectActivity.REQUEST_PROJECT, projectWithProjectNameConflicts.directory
+            Constants.EXTRA_PROJECT_PATH, projectWithProjectNameConflicts.directory
                 .absoluteFile
         )
         resultData2.putExtra(
-            ImportLocalObjectActivity.REQUEST_SCENE,
+            Constants.EXTRA_SCENE_NAMES,
             projectWithProjectNameConflicts.defaultScene.name
         )
-        resultData2.putExtra(ImportLocalObjectActivity.REQUEST_SPRITE, importSprites)
+        resultData2.putExtra(Constants.EXTRA_SPRITE_NAMES, importSprites)
 
         result1 = Instrumentation.ActivityResult(Activity.RESULT_OK, resultData1)
         result2 = Instrumentation.ActivityResult(Activity.RESULT_OK, resultData2)

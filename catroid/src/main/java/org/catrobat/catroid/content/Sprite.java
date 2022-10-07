@@ -778,8 +778,8 @@ public class Sprite implements Nameable, Serializable {
 
 	public void mergeSprites(Sprite sprite, Scene destinationScene) throws IOException {
 		this.scriptList.addAll(sprite.scriptList);
-		copyLooksAndSounds(sprite, destinationScene, true);
 		this.nfcTagList.addAll(sprite.nfcTagList);
+		copyLooksAndSounds(sprite, destinationScene, true);
 
 		for (UserVariable userVariable: sprite.userVariables) {
 			if (!this.userVariables.contains(userVariable)) {

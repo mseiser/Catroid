@@ -118,7 +118,6 @@ class ImportSpritesDialogFragment(
         }
 
         for ((index, data) in newSpritesData.withIndex()) {
-            ImportUtils(requireContext()).copyFilesToSoundAndSpriteDir(data.sprite)
             val sprite: Sprite
             if (data.isObject) {
                 data.sprite.rename(textInput[index]?.text.toString())

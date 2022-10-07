@@ -190,7 +190,7 @@ public abstract class RecyclerViewFragment<T extends Nameable> extends Fragment 
 		BottomBar.showBottomBar(getActivity());
 	}
 
-	private void handleContextualAction() {
+	protected void handleContextualAction() {
 		if (adapter.getSelectedItems().isEmpty()) {
 			actionMode.finish();
 			return;

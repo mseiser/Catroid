@@ -45,7 +45,7 @@ import org.catrobat.catroid.content.Sprite
 import org.catrobat.catroid.formulaeditor.UserList
 import org.catrobat.catroid.io.StorageOperations
 import org.catrobat.catroid.io.XstreamSerializer
-import org.catrobat.catroid.merge.ImportLocalObjectActivity
+import org.catrobat.catroid.merge.SelectLocalImportActivity
 import org.catrobat.catroid.test.merge.MergeTestUtils
 import org.catrobat.catroid.testsuites.annotations.Cat.AppUi
 import org.catrobat.catroid.testsuites.annotations.Level.Smoke
@@ -95,8 +95,8 @@ class SpriteFromLocalIntentTest {
 
         expectedIntent = AllOf.allOf(
             IntentMatchers.hasExtra(
-                ImportLocalObjectActivity.TAG,
-                ImportLocalObjectActivity.REQUEST_PROJECT
+                SelectLocalImportActivity.TAG,
+                SelectLocalImportActivity.ImportType.PROJECT
             )
         )
 
@@ -106,12 +106,12 @@ class SpriteFromLocalIntentTest {
 
         val resultData = Intent()
         resultData.putExtra(
-            ImportLocalObjectActivity.REQUEST_PROJECT,
+            Constants.EXTRA_PROJECT_PATH,
             localProject.directory.absoluteFile
         )
-        resultData.putExtra(ImportLocalObjectActivity.REQUEST_SCENE, localProject.defaultScene.name)
+        resultData.putExtra(Constants.EXTRA_SCENE_NAMES, localProject.defaultScene.name)
         resultData.putExtra(
-            ImportLocalObjectActivity.REQUEST_SPRITE,
+            Constants.EXTRA_SPRITE_NAMES,
             arrayListOf(
                 localProject.defaultScene.backgroundSprite.name,
                 localProject.defaultScene.spriteList[1].name

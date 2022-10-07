@@ -23,6 +23,7 @@
 package org.catrobat.catroid.ui.recyclerview.fragment
 
 import android.annotation.SuppressLint
+import android.app.Activity
 import android.app.Activity.RESULT_OK
 import android.content.Context
 import android.content.DialogInterface
@@ -42,16 +43,17 @@ import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
 import org.catrobat.catroid.ProjectManager
 import org.catrobat.catroid.R
+import org.catrobat.catroid.common.Constants
 import org.catrobat.catroid.common.FlavoredConstants
 import org.catrobat.catroid.common.Nameable
 import org.catrobat.catroid.common.SharedPreferenceKeys
 import org.catrobat.catroid.content.GroupSprite
 import org.catrobat.catroid.content.Sprite
-import org.catrobat.catroid.merge.ImportLocalObjectActivity
-import org.catrobat.catroid.merge.ImportLocalObjectActivity.Companion.REQUEST_PROJECT
 import org.catrobat.catroid.merge.ImportUtils
 import org.catrobat.catroid.merge.ImportVariablesManager
+import org.catrobat.catroid.merge.SelectLocalImportActivity
 import org.catrobat.catroid.ui.BottomBar.hideBottomBar
+import org.catrobat.catroid.ui.ImportFromLocalLauncher
 import org.catrobat.catroid.ui.SpriteActivity
 import org.catrobat.catroid.ui.UiUtils
 import org.catrobat.catroid.ui.WebViewActivity
@@ -109,20 +111,20 @@ class SpriteListFragment : RecyclerViewFragment<Sprite?>() {
     }
 
     public override fun shouldShowEmptyView() =
-        actionModeType != IMPORT_LOCAL && adapter.itemCount == 1
+        activity !is SelectLocalImportActivity && adapter.itemCount == 1
 
     override fun onActivityCreated(savedInstance: Bundle?) {
         super.onActivityCreated(savedInstance)
-        if (ImportLocalObjectActivity.hasExtraTAG(activity) == true) {
+        if (activity is SelectLocalImportActivity) {
             prepareActionMode(IMPORT_LOCAL)
-            ImportLocalObjectActivity.spritesToImport = null
+            SelectLocalImportActivity.sourceSprites = null
         }
     }
 
     override fun onResume() {
         initializeAdapter()
         super.onResume()
-        if (ImportLocalObjectActivity.hasExtraTAG(activity) == false) {
+        if (SelectLocalImportActivity.hasExtraTAG(activity) == false) {
             SnackbarUtil.showHintSnackbar(requireActivity(), R.string.hint_objects)
             val currentProject = projectManager.currentProject
             val title: String = if (!currentProject.hasMultipleScenes()) {
@@ -139,7 +141,7 @@ class SpriteListFragment : RecyclerViewFragment<Sprite?>() {
 
     override fun onAdapterReady() {
         super.onAdapterReady()
-        if (ImportLocalObjectActivity.hasExtraTAG(activity) == false) {
+        if (SelectLocalImportActivity.hasExtraTAG(activity) == false) {
             val callback: ItemTouchHelper.Callback = MultiViewTouchHelperCallback(adapter)
             touchHelper = ItemTouchHelper(callback)
             touchHelper.attachToRecyclerView(recyclerView)
@@ -184,8 +186,8 @@ class SpriteListFragment : RecyclerViewFragment<Sprite?>() {
 
     override fun initializeAdapter() {
         sharedPreferenceDetailsKey = SharedPreferenceKeys.SHOW_DETAILS_SPRITES_PREFERENCE_KEY
-        adapter = if (ImportLocalObjectActivity.hasExtraTAG(activity) == true) {
-            SpriteAdapter(ImportLocalObjectActivity.sceneToImportFrom?.spriteList)
+        adapter = if (activity is SelectLocalImportActivity) {
+            SpriteAdapter(SelectLocalImportActivity.sourceScene?.spriteList)
         } else {
             emptyView.setText(R.string.fragment_sprite_text_description)
             MultiViewSpriteAdapter(projectManager.currentlyEditedScene.spriteList)
@@ -288,12 +290,12 @@ class SpriteListFragment : RecyclerViewFragment<Sprite?>() {
         when (requestCode) {
             IMPORT_MEDIA_OBJECT -> {
                 uri = data?.data ?: return
-                addImportedSpriteOrObject(uri, IMPORT_MEDIA_OBJECT, null)
+                addImportedSpriteOrObject(uri, Constants.REQUEST_MERGE_MEDIA_OBJECT, null)
             }
             IMPORT_LOCAL_OBJECT -> {
                 val extras = data?.extras ?: return
-                uri = Uri.fromFile(extras.get(REQUEST_PROJECT) as File)
-                addImportedSpriteOrObject(uri, IMPORT_LOCAL_OBJECT, extras)
+                uri = Uri.fromFile(extras.get(Constants.EXTRA_PROJECT_PATH) as File)
+                addImportedSpriteOrObject(uri, Constants.REQUEST_MERGE_LOCAL_SPRITE, extras)
             }
         }
     }
@@ -319,8 +321,10 @@ class SpriteListFragment : RecyclerViewFragment<Sprite?>() {
 
     private fun addFromLocalProject(item: Sprite?) {
         currentSprite = item
-        val intent = Intent(requireContext(), ImportLocalObjectActivity::class.java)
-        intent.putExtra(ImportLocalObjectActivity.TAG, REQUEST_PROJECT)
+        val intent = Intent(requireContext(), SelectLocalImportActivity::class.java)
+        intent.putExtra(Constants.EXTRA_IMPORT_REQUEST_KEY, SelectLocalImportActivity.ImportType
+            .SPRITE)
+        intent.putExtra(Constants.EXTRA_FRAGMENT_TYPE_KEY, SelectLocalImportActivity.ImportType.PROJECT)
         startActivityForResult(intent, IMPORT_LOCAL_OBJECT)
     }
 
@@ -407,9 +411,9 @@ class SpriteListFragment : RecyclerViewFragment<Sprite?>() {
 
     override fun importItems(selectedItems: MutableList<Sprite?>?) {
         if (selectedItems != null) {
-            ImportLocalObjectActivity.spritesToImport =
+            SelectLocalImportActivity.sourceSprites =
                 selectedItems.map { it?.name } as ArrayList<String>
-            (activity as ImportLocalObjectActivity).finish()
+            (activity as SelectLocalImportActivity).finish()
         }
     }
 
@@ -453,10 +457,10 @@ class SpriteListFragment : RecyclerViewFragment<Sprite?>() {
             return
         }
 
-        if (activity is ImportLocalObjectActivity && ImportLocalObjectActivity.spritesToImport ==
-            null
+        if (activity is SelectLocalImportActivity &&
+            SelectLocalImportActivity.sourceSprites == null
         ) {
-            (activity as ImportLocalObjectActivity).onBackPressed()
+            (activity as SelectLocalImportActivity).onBackPressed()
         }
     }
 

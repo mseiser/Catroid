@@ -42,7 +42,7 @@ import org.catrobat.catroid.common.DefaultProjectHandler
 import org.catrobat.catroid.content.Project
 import org.catrobat.catroid.io.StorageOperations
 import org.catrobat.catroid.io.XstreamSerializer
-import org.catrobat.catroid.merge.ImportLocalObjectActivity
+import org.catrobat.catroid.merge.SelectLocalImportActivity
 import org.catrobat.catroid.testsuites.annotations.Cat.AppUi
 import org.catrobat.catroid.testsuites.annotations.Level.Smoke
 import org.catrobat.catroid.ui.ProjectActivity
@@ -85,8 +85,8 @@ class DeleteImportedSpriteTest {
 
         expectedIntent = AllOf.allOf(
             IntentMatchers.hasExtra(
-                ImportLocalObjectActivity.TAG,
-                ImportLocalObjectActivity.REQUEST_PROJECT
+                Constants.EXTRA_IMPORT_REQUEST_KEY,
+                SelectLocalImportActivity.ImportType.SPRITE
             )
         )
 
@@ -96,12 +96,10 @@ class DeleteImportedSpriteTest {
 
         val resultData = Intent()
         resultData.putExtra(
-            ImportLocalObjectActivity.REQUEST_PROJECT,
-            localProject.directory.absoluteFile
+            Constants.EXTRA_PROJECT_PATH, localProject.directory.absoluteFile
         )
-        resultData.putExtra(ImportLocalObjectActivity.REQUEST_SCENE, localProject.defaultScene.name)
-        resultData.putExtra(
-            ImportLocalObjectActivity.REQUEST_SPRITE,
+        resultData.putExtra(Constants.EXTRA_SCENE_NAME, localProject.defaultScene.name)
+        resultData.putExtra(Constants.EXTRA_SPRITE_NAMES,
             arrayListOf(
                 localProject.defaultScene.backgroundSprite.name,
                 localProject.defaultScene.spriteList[1].name
