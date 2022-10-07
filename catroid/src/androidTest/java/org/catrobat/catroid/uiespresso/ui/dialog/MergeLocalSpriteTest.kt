@@ -26,7 +26,9 @@ package org.catrobat.catroid.uiespresso.ui.dialog
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.espresso.Espresso
 import androidx.test.espresso.action.ViewActions
+import androidx.test.espresso.matcher.ViewMatchers
 import androidx.test.espresso.matcher.ViewMatchers.isDisplayed
+import androidx.test.espresso.matcher.ViewMatchers.withId
 import androidx.test.espresso.matcher.ViewMatchers.withText
 import androidx.test.platform.app.InstrumentationRegistry
 import org.catrobat.catroid.ProjectManager
@@ -42,6 +44,7 @@ import org.catrobat.catroid.test.utils.TestUtils
 import org.catrobat.catroid.ui.ProjectActivity
 import org.catrobat.catroid.ui.recyclerview.controller.SpriteController
 import org.catrobat.catroid.uiespresso.util.UiTestUtils
+import org.catrobat.catroid.uiespresso.util.UiTestUtils.Companion.childAtPosition
 import org.catrobat.catroid.uiespresso.util.rules.BaseActivityTestRule
 import org.catrobat.catroid.utils.Utils.checkForDuplicates
 import org.hamcrest.Matchers.allOf
@@ -134,6 +137,26 @@ class MergeLocalSpriteTest {
             .perform(ViewActions.click())
         InstrumentationRegistry.getInstrumentation().waitForIdleSync()
 
+        val appCompatCheckBox3 = Espresso.onView(
+            allOf(
+                withId(R.id.checkbox),
+                childAtPosition(
+                    allOf(
+                        withId(R.id.view_holder_with_checkbox),
+                        ViewMatchers.withContentDescription("checkbox"),
+                        childAtPosition(
+                            withId(R.id.recycler_view),
+                            1
+                        )
+                    ),
+                    0
+                ),
+                isDisplayed()
+            )
+        )
+        appCompatCheckBox3.perform(ViewActions.click())
+        Espresso.onView(withId(R.id.confirm)).perform(ViewActions.click())
+
         val sprite1: Sprite = sameGlobalsProject.defaultScene!!.spriteList!![1]
         val mergedSprite: Sprite = projectManager.value.currentProject.defaultScene.spriteList[1]
 
@@ -183,6 +206,26 @@ class MergeLocalSpriteTest {
         InstrumentationRegistry.getInstrumentation().waitForIdleSync()
         Espresso.onView(withText(project.name))
             .perform(ViewActions.click())
+
+        val appCompatCheckBox3 = Espresso.onView(
+            allOf(
+                withId(R.id.checkbox),
+                childAtPosition(
+                    allOf(
+                        withId(R.id.view_holder_with_checkbox),
+                        ViewMatchers.withContentDescription("checkbox"),
+                        childAtPosition(
+                            withId(R.id.recycler_view),
+                            1
+                        )
+                    ),
+                    0
+                ),
+                isDisplayed()
+            )
+        )
+        appCompatCheckBox3.perform(ViewActions.click())
+        Espresso.onView(withId(R.id.confirm)).perform(ViewActions.click())
     }
 
     @Throws(ProjectException::class)

@@ -388,6 +388,7 @@
     <string name="am_rename">Rename</string>
     <string name="am_convert">Convert</string>
     <string name="am_merge">Merge</string>
+    <string name="am_import">Import</string>
     <string name="dialog_confirm_delete">You can\'t undo this!</string>
     <string name="list_headline_sprites">Actors and objects</string>
 
@@ -491,6 +492,9 @@
 
     <!-- Import Local Sprite -->
     <string name= "import_from_project">Select project to import from</string>
+    <string name="import_from_scene">Select scene to import from</string>
+    <string name="import_object">Choose Object Or Actor to import</string>
+    <string name="import_sprite_dialog_title">Import Actors and Objects</string>
 
     <!-- Action Toasts -->
     <!-- Backpack -->
@@ -612,8 +616,6 @@
     <string name="no_projects_selected">No projects selected for import</string>
     <string name="only_select_catrobat_files">Only select project files</string>
     <string name="error_no_files_found">No project files found.</string>
-    <string name="import_sprite_from_project_launcher">Import Object from Local Project</string>
-
     <!-- ProjectOptionsFragment -->
     <string name="project_options_description">Description</string>
     <string name="project_options_notes_and_credits">Notes and credits</string>

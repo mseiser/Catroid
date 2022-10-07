@@ -28,6 +28,7 @@ import androidx.test.espresso.Espresso
 import androidx.test.espresso.action.ViewActions
 import androidx.test.espresso.assertion.ViewAssertions
 import androidx.test.espresso.matcher.RootMatchers
+import androidx.test.espresso.matcher.ViewMatchers
 import androidx.test.espresso.matcher.ViewMatchers.isDisplayed
 import androidx.test.espresso.matcher.ViewMatchers.withId
 import androidx.test.espresso.matcher.ViewMatchers.withText
@@ -45,7 +46,9 @@ import org.catrobat.catroid.io.asynctask.saveProjectSerial
 import org.catrobat.catroid.merge.MergeTestUtils
 import org.catrobat.catroid.test.utils.TestUtils
 import org.catrobat.catroid.ui.ProjectActivity
+import org.catrobat.catroid.uiespresso.util.UiTestUtils
 import org.catrobat.catroid.uiespresso.util.rules.BaseActivityTestRule
+import org.hamcrest.Matchers
 import org.junit.After
 import org.junit.Before
 import org.junit.Rule
@@ -170,9 +173,26 @@ class ImportLocalSpriteTest {
         projectToAddFrom: Project
     ) {
         Espresso.onView(withId(R.id.button_add)).perform(ViewActions.click())
-        Espresso.onView(withId(R.id.dialog_new_look_from_local)).perform(ViewActions.click())
+        Espresso.onView(withId(R.id.dialog_import_sprite_from_local)).perform(ViewActions.click())
         InstrumentationRegistry.getInstrumentation().waitForIdleSync()
         Espresso.onView(withText(projectToAddFrom.name)).perform(ViewActions.click())
+        Espresso.onView(
+            Matchers.allOf(
+                withId(R.id.checkbox),
+                UiTestUtils.childAtPosition(
+                    Matchers.allOf(
+                        withId(R.id.view_holder_with_checkbox),
+                        ViewMatchers.withContentDescription("checkbox"),
+                        UiTestUtils.childAtPosition(
+                            withId(R.id.recycler_view),
+                            1
+                        )
+                    ),
+                    0
+                ),
+                isDisplayed()
+            )
+        )
     }
 
     @Throws(ProjectException::class)
