@@ -285,7 +285,7 @@ class SceneListFragment : RecyclerViewFragment<Scene?>(),
                 .addToBackStack(SpriteListFragment.TAG)
                 .commit()
         }
-        if (activity is SelectLocalImportActivity && item != null) {
+        if (actionModeType == IMPORT_LOCAL && item != null) {
             val activity = activity as SelectLocalImportActivity
             SelectLocalImportActivity.sourceScene = item
             activity.loadNext(SelectLocalImportActivity.ImportType.SCENE)
