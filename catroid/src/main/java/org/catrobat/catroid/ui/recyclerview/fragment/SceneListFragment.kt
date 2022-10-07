@@ -41,6 +41,7 @@ import org.catrobat.catroid.io.asynctask.ProjectLoader.ProjectLoadListener
 import org.catrobat.catroid.io.asynctask.loadProject
 import org.catrobat.catroid.merge.ImportLocalObjectActivity
 import org.catrobat.catroid.merge.ImportLocalObjectActivity.Companion.REQUEST_SCENE
+import org.catrobat.catroid.merge.ImportLocalObjectActivity.Companion.REQUEST_SPRITE
 import org.catrobat.catroid.ui.UiUtils
 import org.catrobat.catroid.ui.controller.BackpackListManager
 import org.catrobat.catroid.ui.recyclerview.adapter.SceneAdapter

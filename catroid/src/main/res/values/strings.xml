@@ -2276,5 +2276,5 @@ needs read and write access to it. You can always change permissions through you
 
     <string name="undo_sort">Undo sort</string>
     <string name="sort">Sort</string>
-    <string name="checkbox">checkbox</string>
+    <string name="checkbox">checkbox</string><string name="import_from_scene">Select scene to import from</string><string name="import_object">Choose Object Or Actor to import</string><string name="import_sprite_dialog_title">Import Actors and Objects</string>
 </resources>

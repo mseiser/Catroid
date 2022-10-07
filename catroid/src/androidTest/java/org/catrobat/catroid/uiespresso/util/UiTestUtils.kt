@@ -158,6 +158,7 @@ class UiTestUtils private constructor() {
             }
         }
 
+
         @JvmStatic
         fun getDefaultTestProject(context: Context): Project {
             val baseProject =
