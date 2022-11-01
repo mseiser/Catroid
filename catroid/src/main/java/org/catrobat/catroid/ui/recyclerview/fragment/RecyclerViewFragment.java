@@ -53,6 +53,7 @@ import org.jetbrains.annotations.NotNull;
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
+import java.util.Arrays;
 import java.util.List;
 
 import androidx.annotation.IntDef;
@@ -320,12 +321,33 @@ public abstract class RecyclerViewFragment<T extends Nameable> extends Fragment 
 	public boolean onOptionsItemSelected(MenuItem item) {
 		switch (item.getItemId()) {
 			case R.id.backpack:
+				if (adapter.getItemCount() == 1) {
+					packItems(adapter.getItems());
+					break;
+				} else if (this instanceof SpriteListFragment && adapter.getItemCount() == 2) {
+					packItems(Arrays.asList(adapter.getItems().get(1)));
+					break;
+				}
 				prepareActionMode(BACKPACK);
 				break;
 			case R.id.copy:
+				if (adapter.getItemCount() == 1) {
+					copyItems(adapter.getItems());
+					break;
+				} else if (this instanceof SpriteListFragment && adapter.getItemCount() == 2) {
+					copyItems(Arrays.asList(adapter.getItems().get(1)));
+					break;
+				}
 				prepareActionMode(COPY);
 				break;
 			case R.id.delete:
+				if (adapter.getItemCount() == 1) {
+					deleteItems(adapter.getItems());
+					break;
+				} else if (this instanceof SpriteListFragment && adapter.getItemCount() == 2) {
+					deleteItems(Arrays.asList(adapter.getItems().get(1)));
+					break;
+				}
 				prepareActionMode(DELETE);
 				break;
 			case R.id.rename:
