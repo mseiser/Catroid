@@ -132,7 +132,7 @@ public abstract class RecyclerViewFragment<T extends Nameable> extends Fragment 
 				onRename(menu);
 				return true;
 			case MERGE:
-				adapter.selectionMode = adapter.PAIRS;
+				adapter.selectionMode = RVAdapter.PAIRS;
 				mode.setTitle(R.string.am_merge);
 				break;
 			case IMPORT_LOCAL:
@@ -147,7 +147,7 @@ public abstract class RecyclerViewFragment<T extends Nameable> extends Fragment 
 	}
 
 	private void onRename(Menu menu) {
-		adapter.selectionMode = adapter.SINGLE;
+		adapter.selectionMode = RVAdapter.SINGLE;
 		adapter.showSettings = false;
 		adapter.showRipples = false;
 		menu.findItem(R.id.confirm).setVisible(false);
@@ -231,7 +231,7 @@ public abstract class RecyclerViewFragment<T extends Nameable> extends Fragment 
 		adapter.showCheckBoxes = false;
 		adapter.showSettings = true;
 		adapter.showRipples = true;
-		adapter.selectionMode = adapter.MULTIPLE;
+		adapter.selectionMode = RVAdapter.MULTIPLE;
 	}
 
 	@Override
@@ -247,7 +247,7 @@ public abstract class RecyclerViewFragment<T extends Nameable> extends Fragment 
 	@Override
 	public void onActivityCreated(Bundle savedInstance) {
 		super.onActivityCreated(savedInstance);
-		if (getActivity().isFinishing()) {
+		if (requireActivity().isFinishing()) {
 			return;
 		}
 		initializeAdapter();
@@ -320,7 +320,7 @@ public abstract class RecyclerViewFragment<T extends Nameable> extends Fragment 
 	public boolean onOptionsItemSelected(MenuItem item) {
 		switch (item.getItemId()) {
 			case R.id.backpack:
-				prepareActionMode(BACKPACK);
+				prepareBackpackActionMode();
 				break;
 			case R.id.copy:
 				prepareActionMode(COPY);
@@ -329,10 +329,10 @@ public abstract class RecyclerViewFragment<T extends Nameable> extends Fragment 
 				prepareActionMode(DELETE);
 				break;
 			case R.id.rename:
-				prepareActionMode(RENAME);
+				startActionMode(RENAME);
 				break;
 			case R.id.merge:
-				prepareActionMode(MERGE);
+				startActionMode(MERGE);
 				break;
 			case R.id.show_details:
 				adapter.showDetails = !adapter.showDetails;
@@ -349,16 +349,38 @@ public abstract class RecyclerViewFragment<T extends Nameable> extends Fragment 
 	}
 
 	protected void prepareActionMode(@ActionModeType int type) {
-		if (type == BACKPACK) {
-			if (isBackpackEmpty()) {
-				startActionMode(BACKPACK);
-			} else if (adapter.getItems().isEmpty()) {
-				switchToBackpack();
-			} else {
-				showBackpackModeChooser();
+		if (adapter.getItemCount() == 1) {
+			switch (type) {
+				case COPY:
+					copyItems(adapter.getItems());
+					break;
+				case DELETE:
+					deleteItems(adapter.getItems());
+					break;
+				case BACKPACK:
+				case IMPORT_LOCAL:
+				case MERGE:
+				case NONE:
+				case RENAME:
+					break;
 			}
 		} else {
 			startActionMode(type);
+		}
+	}
+
+	private void prepareBackpackActionMode() {
+		if (adapter.getItemCount() == 1) {
+			packItems(adapter.getItems());
+			return;
+		}
+
+		if (isBackpackEmpty()) {
+			startActionMode(BACKPACK);
+		} else if (adapter.getItems().isEmpty()) {
+			switchToBackpack();
+		} else {
+			showBackpackModeChooser();
 		}
 	}
 
@@ -368,7 +390,7 @@ public abstract class RecyclerViewFragment<T extends Nameable> extends Fragment 
 			resetActionModeParameters();
 		} else {
 			actionModeType = type;
-			actionMode = getActivity().startActionMode(this);
+			actionMode = requireActivity().startActionMode(this);
 			BottomBar.hideBottomBar(getActivity());
 		}
 	}
@@ -398,7 +420,7 @@ public abstract class RecyclerViewFragment<T extends Nameable> extends Fragment 
 	}
 
 	protected void updateSelectionToggle(Menu menu) {
-		if (adapter.selectionMode == adapter.MULTIPLE) {
+		if (adapter.selectionMode == RVAdapter.MULTIPLE) {
 			MenuItem selectionToggle = menu.findItem(R.id.toggle_selection);
 			selectionToggle.setVisible(true);
 			menu.findItem(R.id.overflow).setVisible(true);
@@ -448,7 +470,7 @@ public abstract class RecyclerViewFragment<T extends Nameable> extends Fragment 
 
 	protected void showBackpackModeChooser() {
 		CharSequence[] items = new CharSequence[] {getString(R.string.pack), getString(R.string.unpack)};
-		new AlertDialog.Builder(getContext())
+		new AlertDialog.Builder(requireContext())
 				.setTitle(R.string.backpack_title)
 				.setItems(items, (dialog, which) -> {
 					switch (which) {
@@ -472,7 +494,7 @@ public abstract class RecyclerViewFragment<T extends Nameable> extends Fragment 
 	protected abstract int getDeleteAlertTitleId();
 
 	protected void showDeleteAlert(final List<T> selectedItems) {
-		new AlertDialog.Builder(getContext())
+		new AlertDialog.Builder(requireContext())
 				.setTitle(getResources().getQuantityString(getDeleteAlertTitleId(), selectedItems.size()))
 				.setMessage(R.string.dialog_confirm_delete)
 				.setPositiveButton(R.string.delete, (dialog, id) -> deleteItems(selectedItems))
@@ -484,7 +506,7 @@ public abstract class RecyclerViewFragment<T extends Nameable> extends Fragment 
 	protected abstract void deleteItems(List<T> selectedItems);
 
 	protected void showRenameDialog(T selectedItem) {
-		TextInputDialog.Builder builder = new TextInputDialog.Builder(getContext());
+		TextInputDialog.Builder builder = new TextInputDialog.Builder(requireContext());
 		builder.setHint(getString(getRenameDialogHint()))
 				.setText(selectedItem.getName())
 				.setTextWatcher(new DuplicateInputTextWatcher(adapter.getItems()))
@@ -507,14 +529,12 @@ public abstract class RecyclerViewFragment<T extends Nameable> extends Fragment 
 		if (adapter.getSelectedItems().size() <= 1) {
 			ToastUtil.showError(getContext(), R.string.am_merge_error);
 		} else {
-			TextInputDialog.Builder builder = new TextInputDialog.Builder(getContext());
+			TextInputDialog.Builder builder = new TextInputDialog.Builder(requireContext());
 
 			builder.setHint(getString(R.string.project_name_label))
 					.setTextWatcher(new NewProjectNameTextWatcher<>())
 					.setPositiveButton(getString(R.string.ok), (TextInputDialog.OnClickListener) (dialog, textInput)
-							-> {
-						mergeProjects(selectedItems, textInput);
-					});
+							-> mergeProjects(selectedItems, textInput));
 
 			builder.setTitle(R.string.new_merge_project_dialog_title)
 					.setNegativeButton(R.string.cancel, null)

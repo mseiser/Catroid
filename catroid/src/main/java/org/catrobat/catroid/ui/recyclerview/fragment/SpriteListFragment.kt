@@ -297,6 +297,20 @@ class SpriteListFragment : RecyclerViewFragment<Sprite?>() {
         startActivityForResult(intent, IMPORT_OBJECT_REQUEST_CODE)
     }
 
+    override fun prepareActionMode(type: Int) {
+        if (adapter.itemCount == 2) {
+            when (type) {
+                COPY ->
+                    copyItems(adapter.items)
+                DELETE ->
+                    deleteItems(adapter.items)
+                else -> super.prepareActionMode(type)
+            }
+        } else {
+            super.prepareActionMode(type)
+        }
+    }
+
     private fun addFromLocalProject(item: Sprite?) {
         currentSprite = item
         val intent = Intent(requireContext(), ProjectListActivity::class.java)
@@ -364,7 +378,6 @@ class SpriteListFragment : RecyclerViewFragment<Sprite?>() {
                 R.id.rename -> showRenameDialog(item)
                 R.id.from_library -> addFromLibrary(item)
                 R.id.from_local -> addFromLocalProject(item)
-                else -> {}
             }
             true
         }

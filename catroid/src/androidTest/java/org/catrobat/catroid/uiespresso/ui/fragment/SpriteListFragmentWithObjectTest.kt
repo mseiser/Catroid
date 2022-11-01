@@ -35,9 +35,7 @@ import org.catrobat.catroid.ui.ProjectActivity
 import org.catrobat.catroid.ui.ProjectActivity.Companion.EXTRA_FRAGMENT_POSITION
 import org.catrobat.catroid.ui.ProjectActivity.Companion.FRAGMENT_SPRITES
 import org.catrobat.catroid.uiespresso.content.brick.utils.BrickTestUtils.createProjectAndGetStartScript
-import org.catrobat.catroid.uiespresso.ui.fragment.rvutils.RecyclerViewInteractionWrapper.onRecyclerView
 import org.catrobat.catroid.uiespresso.util.rules.FragmentActivityTestRule
-import org.hamcrest.Matchers.allOf
 import org.hamcrest.Matchers.not
 import org.junit.Before
 import org.junit.Rule
@@ -73,15 +71,6 @@ class SpriteListFragmentWithObjectTest {
         onView(withText(R.string.delete))
             .perform(click())
 
-        onRecyclerView().atPosition(1)
-            .performCheckItem()
-
-        onView(withId(R.id.confirm))
-            .perform(click())
-
-        onView(allOf(withId(android.R.id.button1), withText(R.string.delete)))
-            .perform(click())
-
         onView(withId(R.id.empty_view))
             .check(matches(isDisplayed()))
 
@@ -92,7 +81,10 @@ class SpriteListFragmentWithObjectTest {
     @Test
     fun testBackpackInOverflow() {
         openActionBarOverflowOrOptionsMenu(baseActivityTestRule.activity)
+        onView(withText(R.string.backpack))
+            .perform(click())
 
+        openActionBarOverflowOrOptionsMenu(baseActivityTestRule.activity)
         onView(withText(R.string.backpack))
             .perform(click())
 
@@ -103,7 +95,10 @@ class SpriteListFragmentWithObjectTest {
     @Test
     fun testCopyInOverflow() {
         openActionBarOverflowOrOptionsMenu(baseActivityTestRule.activity)
+        onView(withText(R.string.copy))
+            .perform(click())
 
+        openActionBarOverflowOrOptionsMenu(baseActivityTestRule.activity)
         onView(withText(R.string.copy))
             .perform(click())
 
@@ -114,7 +109,10 @@ class SpriteListFragmentWithObjectTest {
     @Test
     fun testDeleteInOverflow() {
         openActionBarOverflowOrOptionsMenu(baseActivityTestRule.activity)
+        onView(withText(R.string.delete))
+            .perform(click())
 
+        openActionBarOverflowOrOptionsMenu(baseActivityTestRule.activity)
         onView(withText(R.string.delete))
             .perform(click())
 

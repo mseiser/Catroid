@@ -57,6 +57,7 @@ import org.junit.Rule
 import org.junit.Test
 import org.junit.experimental.categories.Category
 import org.junit.runner.RunWith
+import org.koin.java.KoinJavaComponent.inject
 import java.io.File
 import java.io.IOException
 
@@ -68,6 +69,7 @@ class ProjectCopierTest {
             ProjectListActivity::class.java, true, false
         )
     private val toBeCopiedProjectName = "testProject"
+    private val projectManager: ProjectManager = inject(ProjectManager::class.java).value
 
     @Before
     @Throws(Exception::class)
@@ -82,10 +84,6 @@ class ProjectCopierTest {
         openActionBarOverflowOrOptionsMenu(getInstrumentation().targetContext)
         onView(ViewMatchers.withText(R.string.copy))
             .perform(ViewActions.click())
-        RecyclerViewInteractionWrapper.onRecyclerView().atPosition(0)
-            .performCheckItem()
-        onView(ViewMatchers.withId(R.id.confirm))
-            .perform(ViewActions.click())
         onView(ViewMatchers.withText(toBeCopiedProjectName))
             .check(ViewAssertions.matches(ViewMatchers.isDisplayed()))
         onView(ViewMatchers.withText("$toBeCopiedProjectName (1)"))
@@ -97,10 +95,6 @@ class ProjectCopierTest {
     fun copyCopiedProjectsTest() {
         openActionBarOverflowOrOptionsMenu(getInstrumentation().targetContext)
         onView(ViewMatchers.withText(R.string.copy))
-            .perform(ViewActions.click())
-        RecyclerViewInteractionWrapper.onRecyclerView().atPosition(0)
-            .performCheckItem()
-        onView(ViewMatchers.withId(R.id.confirm))
             .perform(ViewActions.click())
         openActionBarOverflowOrOptionsMenu(getInstrumentation().targetContext)
         onView(ViewMatchers.withText(R.string.copy))
@@ -129,8 +123,8 @@ class ProjectCopierTest {
         script.addBrick(SetXBrick(Formula(BrickValues.X_POSITION)))
         sprite.addScript(script)
         project.defaultScene.addSprite(sprite)
-        ProjectManager.getInstance().currentProject = project
-        ProjectManager.getInstance().currentSprite = sprite
+        projectManager.currentProject = project
+        projectManager.currentSprite = sprite
         XstreamSerializer.getInstance().saveProject(project)
         val soundFile = ResourceImporter.createSoundFileFromResourcesInDirectory(
             getInstrumentation().context.resources,

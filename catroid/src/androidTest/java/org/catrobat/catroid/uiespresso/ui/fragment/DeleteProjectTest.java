@@ -45,11 +45,11 @@ import org.junit.runner.RunWith;
 
 import androidx.test.core.app.ApplicationProvider;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
+import androidx.test.platform.app.InstrumentationRegistry;
 
 import static org.catrobat.catroid.uiespresso.ui.fragment.rvutils.RecyclerViewInteractionWrapper.onRecyclerView;
 import static org.hamcrest.Matchers.allOf;
 
-import static androidx.test.InstrumentationRegistry.getInstrumentation;
 import static androidx.test.espresso.Espresso.onView;
 import static androidx.test.espresso.Espresso.openActionBarOverflowOrOptionsMenu;
 import static androidx.test.espresso.action.ViewActions.click;
@@ -72,15 +72,15 @@ public class DeleteProjectTest {
 	@Before
 	public void setUp() throws Exception {
 		createProject(projectToDelete);
-		createProject("secondProject");
-
-		baseActivityTestRule.launchActivity(null);
 	}
 
 	@Category({Cat.AppUi.class, Level.Smoke.class})
 	@Test
-	public void deleteProjectTest() {
-		openActionBarOverflowOrOptionsMenu(getInstrumentation().getTargetContext());
+	public void deleteProjectMultipleElementsListTest() {
+		createProject("secondProject");
+		baseActivityTestRule.launchActivity(null);
+
+		openActionBarOverflowOrOptionsMenu(InstrumentationRegistry.getInstrumentation().getTargetContext());
 		onView(withText(R.string.delete)).perform(click());
 
 		onRecyclerView().atPosition(0)
@@ -107,8 +107,26 @@ public class DeleteProjectTest {
 
 	@Category({Cat.AppUi.class, Level.Smoke.class})
 	@Test
+	public void deleteProjectSingleElementListTest() {
+		baseActivityTestRule.launchActivity(null);
+
+		openActionBarOverflowOrOptionsMenu(InstrumentationRegistry.getInstrumentation().getTargetContext());
+		onView(withText(R.string.delete)).perform(click());
+
+		onView(withText(projectToDelete))
+				.check(doesNotExist());
+
+		onView(withText("My project"))
+				.check(matches(isDisplayed())); // default project
+	}
+
+	@Category({Cat.AppUi.class, Level.Smoke.class})
+	@Test
 	public void cancelDeleteProjectTest() {
-		openActionBarOverflowOrOptionsMenu(getInstrumentation().getTargetContext());
+		createProject("secondProject");
+		baseActivityTestRule.launchActivity(null);
+
+		openActionBarOverflowOrOptionsMenu(InstrumentationRegistry.getInstrumentation().getTargetContext());
 		onView(withText(R.string.delete)).perform(click());
 
 		onRecyclerView().atPosition(1)
