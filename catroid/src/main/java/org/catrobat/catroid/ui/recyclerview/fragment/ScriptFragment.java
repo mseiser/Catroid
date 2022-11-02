@@ -508,9 +508,17 @@ public class ScriptFragment extends ListFragment implements
 				prepareBackpackActionMode();
 				break;
 			case R.id.copy:
+				if (adapter.getItems().size() == 1) {
+					copy(adapter.getItems());
+					break;
+				}
 				prepareActionMode(COPY);
 				break;
 			case R.id.delete:
+				if (adapter.getItems().size() == 1) {
+					delete(adapter.getItems());
+					break;
+				}
 				prepareActionMode(DELETE);
 				break;
 			case R.id.comment_in_out:
